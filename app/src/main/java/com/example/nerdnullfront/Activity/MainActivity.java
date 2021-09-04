@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nerdnullfront.R;
 
 public class MainActivity extends AppCompatActivity {
-
+    //홈화면으로 사용
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
