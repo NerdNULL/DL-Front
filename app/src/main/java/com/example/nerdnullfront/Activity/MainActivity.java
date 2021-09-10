@@ -2,12 +2,20 @@ package com.example.nerdnullfront.Activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.nerdnullfront.R;
 
@@ -18,12 +26,17 @@ public class MainActivity extends AppCompatActivity {
     private CalendarView calendarView;
     private TextView preShowSchedule;
     private Button checkScheduleBtn;
+    private DrawerLayout parentLayout;
+    private RelativeLayout drawerMenu;
+    private ImageView profileImage;
+    private ListView menuList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setID();
         setEvents();
+
     }
     public void setID(){
         userNameText=findViewById(R.id.userNameText_MainActivity);
@@ -31,19 +44,73 @@ public class MainActivity extends AppCompatActivity {
         calendarView=findViewById(R.id.Calendar_MainActivity);
         preShowSchedule=findViewById(R.id.preShowScheduleText_MainActivity);
         checkScheduleBtn=findViewById(R.id.checkScheduleButton_MainActivity);
+        profileImage=findViewById(R.id.profileImage_MainActivity);
+        parentLayout=findViewById(R.id.parentLayout_MainActivity);
+        drawerMenu=findViewById(R.id.drawerMenu_MainActivity);
+        menuList=findViewById(R.id.menuList_MainActivity);
+
+        ArrayAdapter adapter=new ArrayAdapter(MainActivity.this, android.R.layout.simple_expandable_list_item_1,
+                new String[]{"마이페이지","히스토리","로그아웃"});
+        menuList.setAdapter(adapter);
     }
     public void setEvents(){
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                Toast.makeText(MainActivity.this,""+year+"."+month+"."+dayOfMonth,Toast.LENGTH_SHORT).show();
+            }
+        });
         openSideMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //func
+                parentLayout.openDrawer(drawerMenu); //사이드메뉴 오픈
             }
         });
         checkScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //func
+                Toast.makeText(MainActivity.this,"check Schedule",Toast.LENGTH_SHORT).show();
+                //조회버튼 클릭시, 이벤트
             }
         });
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"profile Image",Toast.LENGTH_SHORT).show();
+                //프로필 이미지 터치시, 변경 이벤트
+            }
+        });
+        menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch(position){
+                    case 0:{
+                        Toast.makeText(MainActivity.this,"My Page",Toast.LENGTH_SHORT).show();
+                        //마이페이지
+                        break;
+                    }
+                    case 1:{
+                        Toast.makeText(MainActivity.this,"History Page",Toast.LENGTH_SHORT).show();
+                        //히스토리(거래내역) 화면 이동
+                        break;
+                    }
+                    case 2:{
+                        Toast.makeText(MainActivity.this,"Logout",Toast.LENGTH_SHORT).show();
+                        if(drawerMenu.isShown())
+                            parentLayout.closeDrawer(drawerMenu);
+                        //로그아웃 이벤트
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerMenu.isShown())
+            parentLayout.closeDrawer(drawerMenu);
+        else
+            super.onBackPressed();
     }
 }
