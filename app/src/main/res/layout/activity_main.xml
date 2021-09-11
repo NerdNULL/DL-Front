@@ -19,16 +19,16 @@
                 android:orientation="horizontal"
                 android:id="@+id/upperMenu_MainActivity"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="#EC896A">
+                android:layout_height="50dp"
+                android:background="@drawable/uppermenu_background">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3">
                     <TextView
                         android:id="@+id/userNameText_MainActivity"
-                        android:textSize="22sp"
-                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textColor="#000000"
                         android:text="Name"
                         android:layout_margin="10dp"
                         android:layout_gravity="center"
@@ -37,8 +37,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="22sp"
-                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:textColor="#000000"
                         android:layout_gravity="center"
                         android:text="님 안녕하세요!"/>
                 </LinearLayout>
@@ -46,7 +46,7 @@
                     android:id="@+id/openSideMenuButton_MainActivity"
                     android:layout_margin="10dp"
                     android:background="@drawable/ic_baseline_menu_24"
-                    android:layout_weight="0.45"
+                    android:layout_weight="0.3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -63,7 +63,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_weight="1"
-                android:background="#FAC9BA"
+                android:background="#DCDDDD"
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <TextView
@@ -80,8 +80,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <Button
+                    android:background="@drawable/roundbutton_background"
                     android:id="@+id/checkScheduleButton_MainActivity"
                     android:text="확인하기"
+                    android:textColor="#000000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -89,14 +91,14 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/drawerMenu_MainActivity"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         android:gravity="center_horizontal"
         android:layout_width="280dp"
         android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/upper"
             android:gravity="center"
-            android:background="#F3A48B"
+            android:background="@drawable/uppermenu_background"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="200dp">
