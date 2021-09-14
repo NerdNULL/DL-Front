@@ -6,11 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity">
-    <RelativeLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:gravity="bottom"
+        app:umanoDragView="@id/dragView"
+        app:umanoScrollableView="@id/scheduleListView_MainActivity"
+        app:umanoPanelHeight="70dp"
+        app:umanoOverlay="false"
+        app:umanoParallaxOffset="200dp"
+        app:umanoShadowHeight="10dp">
+        <!-- gravity 를 bottom으로 하면 아래에서 위로 드래그, top으로 하면 위에서 아래로 드래그 할 수 있다.
+             umanoDragView 드래그 해서 보여줄 view를 선택
+             umanoScrollableView  슬라이딩 패널에 내용물이 패널에 표시되는것보다 많을 때 스크롤 해서 보여줄 view 부분
+             umanoParallaxOffset 에 값을 주면 해당 높이만큼 뒤에 화면을 올려준다.
+             umanoShadowHeight 는 슬라이딩 패널 윗부분에 그림자 효과
+             umanoOverlay 를 false로 해주면 슬라이딩 패널이 위로 보이고 뒷 부분은 반투명하게 보인다. -->
+        <!-- 올라오는 화면을 꽉 채우고 싶다면 match_parent, 내용물 만큼만 보이고 뒷 배경이 반투명처리로 보이고 싶다면 wrap_content-->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -51,44 +67,65 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="30dp"
-                android:layout_weight="3"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
                 <CalendarView
                     android:id="@+id/Calendar_MainActivity"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </CalendarView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:background="#DCDDDD"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <TextView
-                    android:id="@+id/preShowScheduleText_MainActivity"
-                    android:text="일정 미리보기(요약)"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-                <Button
-                    android:background="@drawable/roundbutton_background"
-                    android:id="@+id/checkScheduleButton_MainActivity"
-                    android:text="확인하기"
-                    android:textColor="#000000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
+        <LinearLayout
+            android:background="#ffffff"
+            android:id="@+id/dragView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:background="#A1CFF4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:background="#A1CFF4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/dayText_MainActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Date"
+                        android:textColor="#ffffff"
+                        android:textSize="24sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 스크롤 해서 보여줄 부분은 listview 또는 custom listview 또는 recyclerview를 사용 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="5dp"
+                tools:listitem="@layout/item_schedule"
+                android:id="@+id/scheduleListView_MainActivity"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
     <RelativeLayout
         android:id="@+id/drawerMenu_MainActivity"
         android:layout_gravity="end"
