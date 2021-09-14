@@ -20,20 +20,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.R;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ScheduleAdapter.IClickable{
     //홈화면으로 사용
     private TextView dayText;
     private TextView userNameText;
     private ImageButton openSideMenuBtn;
+    private ImageView slideArrowImage;
     private CalendarView calendarView;
     private DrawerLayout parentLayout;
     private RelativeLayout drawerMenu;
     private ImageView profileImage;
     private ListView menuList;
     private RecyclerView scheduleListView;
+    private SlidingUpPanelLayout slider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         drawerMenu=findViewById(R.id.drawerMenu_MainActivity);
         menuList=findViewById(R.id.menuList_MainActivity);
         scheduleListView=findViewById(R.id.scheduleListView_MainActivity);
+        slider=findViewById(R.id.slider);
+        slideArrowImage=findViewById(R.id.slideArrow_ImageView);
 
         ArrayAdapter adapter=new ArrayAdapter(MainActivity.this, android.R.layout.simple_expandable_list_item_1,
                 new String[]{"마이페이지","히스토리","로그아웃"});
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> arrayList=new ArrayList<String>(); //각 일정들의 정보를 담아야함!!
         arrayList.add("0"); arrayList.add("1"); arrayList.add("2"); //sample
         arrayList.add("3"); arrayList.add("4"); arrayList.add("5"); //sample
-        ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList);
+        ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
         scheduleListView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         scheduleListView.setAdapter(scheduleAdapter);
 
@@ -111,12 +116,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        slider.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) { }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if(newState==SlidingUpPanelLayout.PanelState.COLLAPSED){
+                    slideArrowImage.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
+                }
+                else if(newState==SlidingUpPanelLayout.PanelState.EXPANDED){
+                    slideArrowImage.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void Eventing(int p) {
+        Toast.makeText(MainActivity.this,"position : "+p,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed() {
         if(drawerMenu.isShown())
             parentLayout.closeDrawer(drawerMenu);
+        if(slider.getPanelState()== SlidingUpPanelLayout.PanelState.EXPANDED)
+            slider.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         else
             super.onBackPressed();
     }

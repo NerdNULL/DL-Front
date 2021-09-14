@@ -14,8 +14,13 @@ import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> {
     private List<String> list;
-    public ScheduleAdapter(List<String> list){
+    private IClickable iClickable;
+    public interface IClickable{
+        void Eventing(int p);
+    }
+    public ScheduleAdapter(List<String> list,IClickable ic){
         this.list=list;
+        iClickable=ic;
     }
     @NonNull
     @Override
@@ -27,6 +32,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
         holder.scheduleTitle.setText(list.get(position));
+        holder.itemView.setOnClickListener(v -> {
+            iClickable.Eventing(position);
+        });
     }
 
     @Override
