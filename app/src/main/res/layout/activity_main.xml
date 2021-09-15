@@ -18,7 +18,6 @@
         app:umanoScrollableView="@id/scheduleListView_MainActivity"
         app:umanoPanelHeight="70dp"
         app:umanoOverlay="false"
-        app:umanoParallaxOffset="200dp"
         app:umanoShadowHeight="10dp">
         <!-- gravity 를 bottom으로 하면 아래에서 위로 드래그, top으로 하면 위에서 아래로 드래그 할 수 있다.
              umanoDragView 드래그 해서 보여줄 view를 선택
@@ -79,8 +78,8 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:clickable="true"
                 android:background="#ffffff"
+                android:clickable="true"
                 android:id="@+id/dragView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,19 +89,19 @@
                     android:layout_height="70dp"
                     android:orientation="vertical">
                     <LinearLayout
-                        android:background="#A1CFF4"
+                        android:background="@drawable/schedule_list_background"
+                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.5">
                         <ImageView
                             android:id="@+id/slideArrow_ImageView"
-                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="#A1CFF4"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
@@ -112,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="Date"
-                            android:textColor="#ffffff"
+                            android:textColor="#000000"
                             android:textSize="24sp" />
                     </LinearLayout>
                 </LinearLayout>

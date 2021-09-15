@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements ScheduleAdapter.I
     public void onBackPressed() {
         if(drawerMenu.isShown())
             parentLayout.closeDrawer(drawerMenu);
-        if(slider.getPanelState()== SlidingUpPanelLayout.PanelState.EXPANDED)
+        else if(slider.getPanelState()== SlidingUpPanelLayout.PanelState.EXPANDED)
             slider.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
         else
             super.onBackPressed();
