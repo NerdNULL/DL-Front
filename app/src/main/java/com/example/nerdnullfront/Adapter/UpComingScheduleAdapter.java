@@ -8,17 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
 
 import java.util.List;
-
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> {
-    private List<String> list;
-    private IScheduleClickable iClickable;
-    public interface IScheduleClickable{
-        void onScheduleTouchEventing(int p);
+public class UpComingScheduleAdapter extends RecyclerView.Adapter<UpComingScheduleAdapter.ScheduleHolder> {
+    private List<UpComingScheduleData> list;
+    private IUpComingScheduleClickable iClickable;
+    public interface IUpComingScheduleClickable{
+        void onUpComingScheduleTouchEventing(int p);
     }
-    public ScheduleAdapter(List<String> list,IScheduleClickable ic){
+    public UpComingScheduleAdapter(List<UpComingScheduleData> list, IUpComingScheduleClickable ic){
         this.list=list;
         iClickable=ic;
     }
@@ -26,14 +26,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public ScheduleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        return new ScheduleHolder(inflater.inflate(R.layout.item_schedule,parent,false));
+        return new ScheduleHolder(inflater.inflate(R.layout.item_upcoming_schedule,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
-        holder.scheduleTitle.setText(list.get(position));
+        holder.scheduleTitle.setText(list.get(position).getTitle());
+        holder.scheduleDate.setText(list.get(position).getDate());
         holder.itemView.setOnClickListener(v -> {
-            iClickable.onScheduleTouchEventing(position);
+            iClickable.onUpComingScheduleTouchEventing(position);
         });
     }
 
@@ -44,9 +45,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     class ScheduleHolder extends RecyclerView.ViewHolder {
         private TextView scheduleTitle;
+        private TextView scheduleDate;
         public ScheduleHolder(View v){
             super(v);
-            scheduleTitle=v.findViewById(R.id.scheduleTitle_TextView);
+            scheduleTitle=v.findViewById(R.id.upcomingTitleText);
+            scheduleDate=v.findViewById(R.id.upcomingDateText);
         }
     }
 }
