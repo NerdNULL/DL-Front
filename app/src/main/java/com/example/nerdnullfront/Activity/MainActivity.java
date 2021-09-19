@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity{
     }
     @Override
     public void onBackPressed() {
+        if(allScheduleFragment!=null)
+            allScheduleFragment=null;
         if(drawerMenu.isShown())
             parentLayout.closeDrawer(drawerMenu);
         else
