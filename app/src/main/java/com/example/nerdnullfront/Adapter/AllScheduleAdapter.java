@@ -13,7 +13,7 @@ import com.example.nerdnullfront.R;
 
 import java.util.ArrayList;
 
-public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.ViewHolder> {
+public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.ViewHolder> {
 
     ArrayList<PromiseData> items = new ArrayList<PromiseData>();
 
@@ -54,21 +54,18 @@ public class PromiseAdapter extends RecyclerView.Adapter<PromiseAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView promiseName;
         TextView participants;
         TextView time;
         TextView place;
-
         public ViewHolder(View itemView) {
             super(itemView);
 
-            promiseName = itemView.findViewById(R.id.textView);
-            participants = itemView.findViewById(R.id.textView2);
-            time = itemView.findViewById(R.id.textView3);
-            place = itemView.findViewById(R.id.textView4);
+            promiseName = itemView.findViewById(R.id.scheduleTitle_TextView);
+            participants = itemView.findViewById(R.id.countOfParty_TextView);
+            time = itemView.findViewById(R.id.time_TextView);
+            place = itemView.findViewById(R.id.place_TextView);
         }
-
         public void SetItem(PromiseData item){
             promiseName.setText(item.getPromise_name());
             participants.setText(item.getParticipants());

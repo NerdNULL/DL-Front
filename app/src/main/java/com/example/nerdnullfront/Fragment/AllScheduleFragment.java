@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nerdnullfront.Adapter.PromiseAdapter;
+import com.example.nerdnullfront.Adapter.AllScheduleAdapter;
 import com.example.nerdnullfront.Data.PromiseData;
 import com.example.nerdnullfront.R;
 
@@ -26,10 +26,10 @@ public class AllScheduleFragment extends Fragment {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        PromiseAdapter adapter = new PromiseAdapter();
+        AllScheduleAdapter adapter = new AllScheduleAdapter();
 
         //adapter.addItem(new PromiseData("저녁","명하,선민","2021.09.12","역곡"));
-        adapter.addItem(new PromiseData("아침","명하,선민","2021.09.12","역곡"));
+        adapter.addItem(new PromiseData("아침","명하,선민,정훈,영웅","2021.09.12","역곡"));
         adapter.addItem(new PromiseData("저녁","명하,선민","2021.09.12","역곡"));
 
         recyclerView.setAdapter(adapter);

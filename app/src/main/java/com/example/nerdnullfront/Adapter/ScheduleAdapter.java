@@ -8,17 +8,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nerdnullfront.Data.PromiseData;
 import com.example.nerdnullfront.R;
 
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> {
-    private List<String> list;
+    private List<PromiseData> list;
     private IScheduleClickable iClickable;
     public interface IScheduleClickable{
         void onScheduleTouchEventing(int p);
     }
-    public ScheduleAdapter(List<String> list,IScheduleClickable ic){
+    public ScheduleAdapter(List<PromiseData> list,IScheduleClickable ic){
         this.list=list;
         iClickable=ic;
     }
@@ -26,12 +27,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     @Override
     public ScheduleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        return new ScheduleHolder(inflater.inflate(R.layout.item_schedule,parent,false));
+        return new ScheduleHolder(inflater.inflate(R.layout.item_promise,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
-        holder.scheduleTitle.setText(list.get(position));
+        holder.promiseName.setText(list.get(position).getPromise_name());
+        holder.participants.setText(list.get(position).getParticipants());
+        holder.place.setText(list.get(position).getPlace());
+        holder.time.setText(list.get(position).getTime());
         holder.itemView.setOnClickListener(v -> {
             iClickable.onScheduleTouchEventing(position);
         });
@@ -43,10 +47,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     }
 
     class ScheduleHolder extends RecyclerView.ViewHolder {
-        private TextView scheduleTitle;
+        TextView promiseName;
+        TextView participants;
+        TextView time;
+        TextView place;
         public ScheduleHolder(View v){
             super(v);
-            scheduleTitle=v.findViewById(R.id.scheduleTitle_TextView);
+            promiseName = itemView.findViewById(R.id.scheduleTitle_TextView);
+            participants = itemView.findViewById(R.id.countOfParty_TextView);
+            time = itemView.findViewById(R.id.time_TextView);
+            place = itemView.findViewById(R.id.place_TextView);
         }
     }
 }

@@ -18,11 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
+import com.example.nerdnullfront.Data.PromiseData;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarFragment extends Fragment implements ScheduleAdapter.IScheduleClickable,
         UpComingScheduleAdapter.IUpComingScheduleClickable{
@@ -38,6 +41,14 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
 
         setID(view);
         setEvents();
+
+        Calendar calendar = Calendar.getInstance();
+        Date curDate = new Date(calendarView.getDate());
+        calendar.setTime(curDate);
+        String thisDay = (calendar.get(Calendar.YEAR))+ "." +
+                (calendar.get(Calendar.MONTH)+1) + ". " +(calendar.get(Calendar.DATE));
+        dayText.setText(thisDay);
+
         return view;
     }
     public void setID(View view){
@@ -49,20 +60,10 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         slideArrowImage=view.findViewById(R.id.slideArrow_ImageView);
 
         //해당 날짜의 모든 일정 슬라이딩 업 레이아웃 리스트
-        ArrayList<String> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
-        arrayList.add("0"); arrayList.add("1"); arrayList.add("2"); //sample
-        arrayList.add("3"); arrayList.add("4"); arrayList.add("5"); //sample
-        ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
-        scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        scheduleListView.setAdapter(scheduleAdapter);
+        setScheduleListView();
 
         //다가오는 스케줄 리스트 2개
-        ArrayList<UpComingScheduleData> upComingScheduleDataArrayList=new ArrayList();
-        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing1","Whenever1"));
-        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing2","Whenever2"));
-        UpComingScheduleAdapter upComingScheduleAdapter=new UpComingScheduleAdapter(upComingScheduleDataArrayList,this);
-        upComingScheduleListView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        upComingScheduleListView.setAdapter(upComingScheduleAdapter);
+        setUpComingScheduleListView();
 
     }
     public void setEvents(){
@@ -89,7 +90,22 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
             }
         });
     }
-
+    void setScheduleListView(){
+        ArrayList<PromiseData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
+        arrayList.add(new PromiseData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
+        arrayList.add(new PromiseData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
+        ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
+        scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        scheduleListView.setAdapter(scheduleAdapter);
+    }
+    void setUpComingScheduleListView(){
+        ArrayList<UpComingScheduleData> upComingScheduleDataArrayList=new ArrayList();
+        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing1","Whenever1"));
+        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing2","Whenever2"));
+        UpComingScheduleAdapter upComingScheduleAdapter=new UpComingScheduleAdapter(upComingScheduleDataArrayList,this);
+        upComingScheduleListView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        upComingScheduleListView.setAdapter(upComingScheduleAdapter);
+    }
     @Override
     public void onScheduleTouchEventing(int p) {
         Toast.makeText(getContext(),"position : "+p,Toast.LENGTH_SHORT).show();

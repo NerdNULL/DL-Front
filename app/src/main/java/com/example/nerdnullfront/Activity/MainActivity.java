@@ -91,6 +91,11 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     }
                     case 3:{
+                        if(allScheduleFragment!=null){
+                            if(drawerMenu.isShown())
+                                parentLayout.closeDrawer(drawerMenu);
+                            break;
+                        }
                         allScheduleFragment=new AllScheduleFragment();
                         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frameLayout_MainActivity,allScheduleFragment);
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity{
                         fragmentTransaction.commit();
                         if(drawerMenu.isShown())
                             parentLayout.closeDrawer(drawerMenu);
+                        break;
                     }
                 }
             }
