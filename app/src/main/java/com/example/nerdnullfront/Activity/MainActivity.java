@@ -1,5 +1,6 @@
 package com.example.nerdnullfront.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(MainActivity.this,"Logout",Toast.LENGTH_SHORT).show();
                         if(drawerMenu.isShown())
                             parentLayout.closeDrawer(drawerMenu);
-                        //로그아웃 이벤트
+                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     }
                     case 3:{
@@ -104,6 +107,7 @@ public class MainActivity extends AppCompatActivity{
                         if(drawerMenu.isShown())
                             parentLayout.closeDrawer(drawerMenu);
                         break;
+                        //전체 일정리스트
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.nerdnullfront.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,9 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //func
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent); //바로이동
+                finish();
             }
         });
     }

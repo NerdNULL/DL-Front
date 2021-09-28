@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
-import com.example.nerdnullfront.Data.PromiseData;
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -91,9 +91,9 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         });
     }
     void setScheduleListView(){
-        ArrayList<PromiseData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
-        arrayList.add(new PromiseData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
-        arrayList.add(new PromiseData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
+        ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
+        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
+        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
         ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
         scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         scheduleListView.setAdapter(scheduleAdapter);

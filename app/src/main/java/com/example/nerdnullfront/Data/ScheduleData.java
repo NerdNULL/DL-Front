@@ -1,13 +1,13 @@
 package com.example.nerdnullfront.Data;
 
-public class PromiseData {
+public class ScheduleData {
 
     String promiseName;
     String participants;
     String time;
     String place;
 
-    public PromiseData(String promiseName, String participants, String time, String place) {
+    public ScheduleData(String promiseName, String participants, String time, String place) {
         this.promiseName = promiseName;
         this.participants = participants;
         this.time = time;

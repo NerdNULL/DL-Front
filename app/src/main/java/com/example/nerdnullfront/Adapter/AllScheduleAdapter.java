@@ -8,28 +8,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nerdnullfront.Data.PromiseData;
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 
 import java.util.ArrayList;
 
 public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.ViewHolder> {
 
-    ArrayList<PromiseData> items = new ArrayList<PromiseData>();
+    ArrayList<ScheduleData> items = new ArrayList<ScheduleData>();
 
-    public void addItem(PromiseData item) {
+    public void addItem(ScheduleData item) {
         items.add(item);
     }
 
-    public void setItems(ArrayList<PromiseData> items) {
+    public void setItems(ArrayList<ScheduleData> items) {
         this.items = items;
     }
 
-    public PromiseData getItem(int position) {
+    public ScheduleData getItem(int position) {
         return items.get(position);
     }
 
-    public void setItem(int position, PromiseData item) {
+    public void setItem(int position, ScheduleData item) {
         items.set(position, item);
     }
 
@@ -44,7 +44,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PromiseData item = items.get(position);
+        ScheduleData item = items.get(position);
         holder.SetItem(item);
     }
 
@@ -66,7 +66,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
             time = itemView.findViewById(R.id.time_TextView);
             place = itemView.findViewById(R.id.place_TextView);
         }
-        public void SetItem(PromiseData item){
+        public void SetItem(ScheduleData item){
             promiseName.setText(item.getPromise_name());
             participants.setText(item.getParticipants());
             time.setText(item.getTime());

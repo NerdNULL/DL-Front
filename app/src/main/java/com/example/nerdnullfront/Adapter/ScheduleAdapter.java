@@ -8,18 +8,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nerdnullfront.Data.PromiseData;
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> {
-    private List<PromiseData> list;
+    private List<ScheduleData> list;
     private IScheduleClickable iClickable;
     public interface IScheduleClickable{
         void onScheduleTouchEventing(int p);
     }
-    public ScheduleAdapter(List<PromiseData> list,IScheduleClickable ic){
+    public ScheduleAdapter(List<ScheduleData> list, IScheduleClickable ic){
         this.list=list;
         iClickable=ic;
     }
