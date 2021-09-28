@@ -9,6 +9,6 @@
         android:id="@+id/PromiseRecycler"
         android:layout_width="409dp"
         android:layout_height="657dp"
-        tools:listitem="@layout/item_promise"
+        tools:listitem="@layout/item_schedule"
         />
 </LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="range_year">
+        <item>2021년</item>
+        <item>2020년</item>
+    </string-array>
+</resources>

@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity{
                     }
                     case 1:{
                         Toast.makeText(MainActivity.this,"History Page",Toast.LENGTH_SHORT).show();
+                        Intent intent =new Intent(MainActivity.this,HistoryActivity.class);
+                        startActivity(intent);
+                        if(drawerMenu.isShown())
+                            parentLayout.closeDrawer(drawerMenu);
                         //히스토리(거래내역) 화면 이동
                         break;
                     }

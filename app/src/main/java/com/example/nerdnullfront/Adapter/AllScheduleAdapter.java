@@ -37,7 +37,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.item_promise,viewGroup, false);
+        View itemView = inflater.inflate(R.layout.item_schedule,viewGroup, false);
 
         return new ViewHolder(itemView);
     }
