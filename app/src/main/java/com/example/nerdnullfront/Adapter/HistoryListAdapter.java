@@ -31,7 +31,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull HistoryHolder holder, int position) {
-        holder.cost.setText(list.get(position).getCost());
+        holder.cost.setText(list.get(position).getCost()+" 원");
         holder.date.setText(list.get(position).getDate());
     }
 

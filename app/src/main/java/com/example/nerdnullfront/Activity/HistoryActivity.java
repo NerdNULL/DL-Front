@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class HistoryActivity extends AppCompatActivity {
     private TextView usernameTextView,sumPaymentText;
     private RecyclerView historyList;
-    private Spinner year_S,month_S,order_S;
+    private Spinner dateRange_S,order_S;
     private HistoryListAdapter historyListAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,26 +42,16 @@ public class HistoryActivity extends AppCompatActivity {
         usernameTextView=findViewById(R.id.userNameText_HistoryActivity);
         sumPaymentText=findViewById(R.id.PaymentText_HistoryActivity);
         historyList=findViewById(R.id.historyRecyclerview_HistoryActivity);
-        year_S=findViewById(R.id.yearSpinner);
-        month_S=findViewById(R.id.monthSpinner);
+        dateRange_S=findViewById(R.id.yearSpinner);
         order_S=findViewById(R.id.orderSpinner);
         historyListAdapter=new HistoryListAdapter();
     }
     public void setEvents(){
-        year_S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dateRange_S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String YEAR=parent.getItemAtPosition(position).toString();
-                Toast.makeText(HistoryActivity.this,YEAR,Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
-        });
-        month_S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String MONTH=parent.getItemAtPosition(position).toString();
-                Toast.makeText(HistoryActivity.this,MONTH,Toast.LENGTH_SHORT).show();
+                String RANGE=parent.getItemAtPosition(position).toString();
+                Toast.makeText(HistoryActivity.this,RANGE,Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }

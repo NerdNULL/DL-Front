@@ -21,7 +21,7 @@
         <Button
             android:id="@+id/loginButton_LoginActivity"
             android:text="Login"
-            android:background="#FF5722"
+            android:background="@drawable/roundbutton_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
