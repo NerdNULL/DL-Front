@@ -17,9 +17,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.nerdnullfront.Fragment.AllScheduleFragment;
 import com.example.nerdnullfront.Fragment.CalendarFragment;
 import com.example.nerdnullfront.R;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 public class MainActivity extends AppCompatActivity{
     //홈화면으로 사용
@@ -32,12 +35,20 @@ public class MainActivity extends AppCompatActivity{
     private CalendarFragment calendarFragment;
     private AllScheduleFragment allScheduleFragment;
     private FragmentManager fragmentManager=null;
+    //계정정보
+    private String nickName=null;
+    private String profileImageURI=null;
+    private String email=null; //마이페이지에서 쓰여질것.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setID();
         setEvents();
+
+        setMyAccountInfo(getIntent());
+        setUserNickName(nickName);
+        setUserProfileImage(profileImageURI);
 
         calendarFragment=new CalendarFragment();
         fragmentManager=getSupportFragmentManager();
@@ -55,6 +66,20 @@ public class MainActivity extends AppCompatActivity{
         ArrayAdapter adapter=new ArrayAdapter(MainActivity.this, android.R.layout.simple_expandable_list_item_1,
                 new String[]{"마이페이지","히스토리","로그아웃","전체 일정"});
         menuList.setAdapter(adapter);
+    }
+    public void setMyAccountInfo(Intent intent){
+        nickName=intent.getStringExtra("name");
+        profileImageURI=intent.getStringExtra("profileImage");
+        email=intent.getStringExtra("email");
+    }
+    public void setUserNickName(String name){
+        if(name!=null)
+            userNameText.setText(name);
+    }
+    public void setUserProfileImage(String uri){
+        if(uri!=null){
+            Glide.with(this).load(uri).into(profileImage);
+        }
     }
     public void setEvents(){
         openSideMenuBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +114,18 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     }
                     case 2:{
-                        Toast.makeText(MainActivity.this,"Logout",Toast.LENGTH_SHORT).show();
+                        //로그아웃
+                        Toast.makeText(MainActivity.this,"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
                         if(drawerMenu.isShown())
                             parentLayout.closeDrawer(drawerMenu);
-                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                            @Override
+                            public void onCompleteLogout() {
+                                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
                         break;
                     }
                     case 3:{

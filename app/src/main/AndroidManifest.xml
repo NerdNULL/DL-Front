@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nerdnullfront">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -8,7 +9,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:name=".SDKHandler.CustomApplication"
         android:theme="@style/Theme.NerdNullFront">
+
+        <meta-data android:name="com.kakao.sdk.AppKey"
+            android:value="eb61e62ae286fd1bce3e8fd771c638ea"/>
+
         <activity android:name=".Activity.MainActivity"></activity>
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
