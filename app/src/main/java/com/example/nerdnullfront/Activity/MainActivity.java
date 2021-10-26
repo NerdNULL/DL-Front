@@ -88,20 +88,20 @@ public class MainActivity extends AppCompatActivity{
                 parentLayout.openDrawer(drawerMenu); //사이드메뉴 오픈
             }
         });
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"profile Image",Toast.LENGTH_SHORT).show();
-                //프로필 이미지 터치시, 변경 이벤트
-            }
-        });
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch(position){
                     case 0:{
+                        //마이페이지 이동
                         Toast.makeText(MainActivity.this,"My Page",Toast.LENGTH_SHORT).show();
-                        //마이페이지
+                        Intent intent=new Intent(MainActivity.this,MyPageActivity.class);
+                        intent.putExtra("name",nickName); //닉네임
+                        intent.putExtra("profileImage",profileImageURI); //프로필 이미지
+                        intent.putExtra("email",email); //프로필 이미지
+                        startActivity(intent);
+                        if(drawerMenu.isShown())
+                            parentLayout.closeDrawer(drawerMenu);
                         break;
                     }
                     case 1:{

@@ -46,7 +46,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         Date curDate = new Date(calendarView.getDate());
         calendar.setTime(curDate);
         String thisDay = (calendar.get(Calendar.YEAR))+ "." +
-                (calendar.get(Calendar.MONTH)+1) + ". " +(calendar.get(Calendar.DATE));
+                (calendar.get(Calendar.MONTH)+1) + "." +(calendar.get(Calendar.DATE));
         dayText.setText(thisDay);
 
         return view;

@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".Activity.InvitedActivity"/>
         <activity android:name=".Activity.HistoryActivity"/>
+        <activity android:name=".Activity.MyPageActivity"/>
     </application>
 
 </manifest>
