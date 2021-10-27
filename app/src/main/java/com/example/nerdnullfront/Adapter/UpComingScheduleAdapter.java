@@ -12,6 +12,8 @@ import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
 
 import java.util.List;
+
+//다가오는 일정리스트뷰의 어뎁터
 public class UpComingScheduleAdapter extends RecyclerView.Adapter<UpComingScheduleAdapter.ScheduleHolder> {
     private List<UpComingScheduleData> list;
     private IUpComingScheduleClickable iClickable;
@@ -33,7 +35,7 @@ public class UpComingScheduleAdapter extends RecyclerView.Adapter<UpComingSchedu
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
         holder.scheduleTitle.setText(list.get(position).getTitle());
         holder.scheduleDate.setText(list.get(position).getDate());
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> { //뷰 터치시,
             iClickable.onUpComingScheduleTouchEventing(position);
         });
     }

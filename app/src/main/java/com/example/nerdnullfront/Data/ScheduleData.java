@@ -1,7 +1,6 @@
 package com.example.nerdnullfront.Data;
-
+//각 리스트의 일정 아이템뷰에서 사용될 데이터클래스
 public class ScheduleData {
-
     String promiseName;
     String participants;
     String time;

@@ -13,6 +13,7 @@ import com.example.nerdnullfront.R;
 
 import java.util.ArrayList;
 
+//전체 일정리스트뷰 어뎁터
 public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.ViewHolder> {
 
     ArrayList<ScheduleData> items = new ArrayList<ScheduleData>();
@@ -45,7 +46,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScheduleData item = items.get(position);
-        holder.SetItem(item);
+        holder.SetItem(item);//세팅
     }
 
     @Override
@@ -66,7 +67,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
             time = itemView.findViewById(R.id.time_TextView);
             place = itemView.findViewById(R.id.place_TextView);
         }
-        public void SetItem(ScheduleData item){
+        public void SetItem(ScheduleData item){ //각 리스트뷰에 데이터클래스의 속성 대입
             promiseName.setText(item.getPromise_name());
             participants.setText(item.getParticipants());
             time.setText(item.getTime());

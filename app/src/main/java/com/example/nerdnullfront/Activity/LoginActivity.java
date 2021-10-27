@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * 카카오 API 사용을 위한 HashKey를 반환
+     * 카카오 API 사용을 위한 HashKey를 반환 - 개발시 한 번만 활용될것.
      */
     private void getAppKeyHash(){
         try{

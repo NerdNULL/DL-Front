@@ -13,15 +13,16 @@ import com.example.nerdnullfront.R;
 
 import java.util.List;
 
+//금액 사용내역 리스트뷰의 어뎁터
 public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.HistoryHolder> {
     private List<HistoryData> list;
     public HistoryListAdapter(List<HistoryData> list){
         this.list=list;
-    }
+    } //리스트를 건네주는 생성자
     public HistoryListAdapter(){ }
     public void setList(List<HistoryData> list){
         this.list=list;
-    }
+    } //동기적인 리스트 업데이트시 사용
     @NonNull
     @Override
     public HistoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

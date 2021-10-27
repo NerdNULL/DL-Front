@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity{
     private RelativeLayout drawerMenu;
     private ImageView profileImage;
     private ListView menuList;
-    private CalendarFragment calendarFragment;
-    private AllScheduleFragment allScheduleFragment;
+    private CalendarFragment calendarFragment; //캘린더 프래그먼트
+    private AllScheduleFragment allScheduleFragment; //전체 일정 프래그먼트
     private FragmentManager fragmentManager=null;
     //계정정보
     private String nickName=null;
@@ -46,12 +46,13 @@ public class MainActivity extends AppCompatActivity{
         setID();
         setEvents();
 
-        setMyAccountInfo(getIntent());
-        setUserNickName(nickName);
-        setUserProfileImage(profileImageURI);
+        setMyAccountInfo(getIntent()); //카카오계정 정보를 받아옴
+        setUserNickName(nickName); //닉네임 설정
+        setUserProfileImage(profileImageURI); //프로필 사진 설정
 
         calendarFragment=new CalendarFragment();
         fragmentManager=getSupportFragmentManager();
+        //초기화면은 달력 프래그먼트이다.
         fragmentManager.beginTransaction().replace(R.id.frameLayout_MainActivity,calendarFragment).commit();
 
     }
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity{
         drawerMenu=findViewById(R.id.drawerMenu_MainActivity);
         menuList=findViewById(R.id.menuList_MainActivity);
 
+        //사이드 메뉴의 리스트
         ArrayAdapter adapter=new ArrayAdapter(MainActivity.this, android.R.layout.simple_expandable_list_item_1,
                 new String[]{"마이페이지","히스토리","로그아웃","전체 일정"});
         menuList.setAdapter(adapter);

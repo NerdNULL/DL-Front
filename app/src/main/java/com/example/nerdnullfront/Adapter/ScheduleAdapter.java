@@ -13,6 +13,7 @@ import com.example.nerdnullfront.R;
 
 import java.util.List;
 
+//날짜마다의 일정리스트뷰의 어뎁터 클래스
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleHolder> {
     private List<ScheduleData> list;
     private IScheduleClickable iClickable;

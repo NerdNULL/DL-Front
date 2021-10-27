@@ -42,6 +42,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         setID(view);
         setEvents();
 
+        //초기화면 설정
         Calendar calendar = Calendar.getInstance();
         Date curDate = new Date(calendarView.getDate());
         calendar.setTime(curDate);
@@ -67,7 +68,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
 
     }
     public void setEvents(){
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() { //캘린더의 날짜변경에 따른 이벤트
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String thisDay=""+year+"."+(month+1)+"."+dayOfMonth;
@@ -75,22 +76,22 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
                 dayText.setText(thisDay);
             }
         });
-        slider.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        slider.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() { //패널 상태 리스너
             @Override
             public void onPanelSlide(View panel, float slideOffset) { }
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                if(newState==SlidingUpPanelLayout.PanelState.COLLAPSED){
+                if(newState==SlidingUpPanelLayout.PanelState.COLLAPSED){ //펼쳐지기 전,
                     slideArrowImage.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
                 }
-                else if(newState==SlidingUpPanelLayout.PanelState.EXPANDED){
+                else if(newState==SlidingUpPanelLayout.PanelState.EXPANDED){ //펼쳐진 후,
                     slideArrowImage.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
                 }
             }
         });
     }
-    void setScheduleListView(){
+    void setScheduleListView(){ //각 날짜마다의 일정정보를 업데이트
         ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
         arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
         arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
@@ -98,7 +99,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         scheduleListView.setAdapter(scheduleAdapter);
     }
-    void setUpComingScheduleListView(){
+    void setUpComingScheduleListView(){ //다가오는 일정 2개를 미리 보여줌.
         ArrayList<UpComingScheduleData> upComingScheduleDataArrayList=new ArrayList();
         upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing1","Whenever1"));
         upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing2","Whenever2"));
@@ -107,12 +108,12 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         upComingScheduleListView.setAdapter(upComingScheduleAdapter);
     }
     @Override
-    public void onScheduleTouchEventing(int p) {
+    public void onScheduleTouchEventing(int p) { //날짜마다의 일정 터치 이벤트 함수
         Toast.makeText(getContext(),"position : "+p,Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onUpComingScheduleTouchEventing(int p) {
+    public void onUpComingScheduleTouchEventing(int p) { //다가오는 일정 터치시 이벤트 함수
         Toast.makeText(getContext(),"Up Coming position : "+p,Toast.LENGTH_SHORT).show();
     }
 }
