@@ -34,12 +34,12 @@
     <LinearLayout
         android:padding="10dp"
         android:orientation="vertical"
-        android:background="@drawable/roundbutton_background"
+        android:background="#FFEB3B"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textColor="#807F7F"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:text="계정정보"
             android:layout_width="match_parent"
