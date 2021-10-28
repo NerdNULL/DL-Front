@@ -21,6 +21,7 @@ import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     private CalendarView calendarView;
     private RecyclerView scheduleListView,upComingScheduleListView;
     private SlidingUpPanelLayout slider;
+    private FloatingActionButton floatingActionButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         upComingScheduleListView=view.findViewById(R.id.upcomingSchedule_MainActivity);
         slider=view.findViewById(R.id.slider);
         slideArrowImage=view.findViewById(R.id.slideArrow_ImageView);
+        floatingActionButton=view.findViewById(R.id.addSchedule);
 
         //해당 날짜의 모든 일정 슬라이딩 업 레이아웃 리스트
         setScheduleListView();
@@ -90,9 +93,19 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
                 }
             }
         });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //약속 추가화면
+            }
+        });
     }
     void setScheduleListView(){ //각 날짜마다의 일정정보를 업데이트
         ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
+        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
+        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
+        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
+        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
         arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
         arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
         ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
