@@ -53,4 +53,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/withdrawUser"
+        android:layout_margin="10dp"
+        android:text="회원 탈퇴"
+        android:textSize="18sp"
+        android:background="@drawable/roundbutton_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
