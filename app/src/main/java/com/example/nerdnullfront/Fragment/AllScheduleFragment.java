@@ -55,6 +55,7 @@ public class AllScheduleFragment extends Fragment implements AllScheduleAdapter.
 
     @Override
     public void onAllScheduleTouchEventing(int p) {
-        Toast.makeText(getContext(),"position 131231: "+p,Toast.LENGTH_SHORT).show();
+        //주목 - 이 메시지라도 떠야 하는데 왜 안뜨는걸까 / 누르면 어플 강제종료
+        Toast.makeText(getContext(),"이게 나타나면 클릭 이벤트 된건가: "+p,Toast.LENGTH_SHORT).show();
     }
 }

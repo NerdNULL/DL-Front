@@ -34,6 +34,7 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
         items.set(position, item);
     }
 
+    //주목 - 클릭이벤트 인터페이스 생성했는데
     @NonNull
     private IAllScheduleClickable iClickable;
     public interface IAllScheduleClickable{
@@ -53,7 +54,8 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScheduleData item = items.get(position);
         holder.SetItem(item);//세팅
-        holder.itemView.setOnClickListener(v -> { //뷰 터치시,
+        //주목 - 클릭이벤트 인터페이스 생성했는데
+        holder.itemView.setOnClickListener(v -> {
             iClickable.onAllScheduleTouchEventing(position);
         });
     }
