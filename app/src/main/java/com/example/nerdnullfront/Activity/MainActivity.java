@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     }
                     case 3:{
+                        //'전체일정' 이동
                         if(allScheduleFragment!=null){
                             if(drawerMenu.isShown())
                                 parentLayout.closeDrawer(drawerMenu);

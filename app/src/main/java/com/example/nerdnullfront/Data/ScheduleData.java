@@ -1,6 +1,9 @@
 package com.example.nerdnullfront.Data;
+
+import java.io.Serializable;
+
 //각 리스트의 일정 아이템뷰에서 사용될 데이터클래스
-public class ScheduleData {
+public class ScheduleData implements Serializable {
     String promiseName;
     String participants;
     String time;

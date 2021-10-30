@@ -35,6 +35,12 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     }
 
     @NonNull
+    private IAllScheduleClickable iClickable;
+    public interface IAllScheduleClickable{
+        void onAllScheduleTouchEventing(int p);
+    }
+
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
@@ -47,6 +53,9 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScheduleData item = items.get(position);
         holder.SetItem(item);//세팅
+        holder.itemView.setOnClickListener(v -> { //뷰 터치시,
+            iClickable.onAllScheduleTouchEventing(position);
+        });
     }
 
     @Override

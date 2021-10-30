@@ -1,6 +1,8 @@
 package com.example.nerdnullfront.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nerdnullfront.Activity.PromiseDetailActivity;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
 
@@ -38,6 +41,7 @@ public class UpComingScheduleAdapter extends RecyclerView.Adapter<UpComingSchedu
         holder.itemView.setOnClickListener(v -> { //뷰 터치시,
             iClickable.onUpComingScheduleTouchEventing(position);
         });
+
     }
 
     @Override
@@ -52,6 +56,7 @@ public class UpComingScheduleAdapter extends RecyclerView.Adapter<UpComingSchedu
             super(v);
             scheduleTitle=v.findViewById(R.id.upcomingTitleText);
             scheduleDate=v.findViewById(R.id.upcomingDateText);
+
         }
     }
 }

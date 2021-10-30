@@ -2,6 +2,7 @@ package com.example.nerdnullfront.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -49,6 +50,19 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         String thisDay = (calendar.get(Calendar.YEAR))+ "." +
                 (calendar.get(Calendar.MONTH)+1) + "." +(calendar.get(Calendar.DATE));
         dayText.setText(thisDay);
+        //수정
+        /*
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if(event.getAction() == MotionEvent.ACTION_MOVE){
+                    Toast.makeText(getContext(),"dfadfda",Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        */
+        //수정끝
 
         return view;
     }
