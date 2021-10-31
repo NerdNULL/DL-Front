@@ -166,7 +166,7 @@
                 android:id="@+id/button_reject"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:background="@drawable/rejected"
+                android:background="@drawable/deleted"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"

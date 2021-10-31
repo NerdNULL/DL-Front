@@ -1,8 +1,8 @@
 package com.example.nerdnullfront.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nerdnullfront.Activity.PromiseAddActivity;
+import com.example.nerdnullfront.Activity.PromiseDetailActivity;
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
@@ -110,6 +112,8 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), PromiseAddActivity.class);
+                startActivity(intent);
                 //약속 추가화면
             }
         });
@@ -136,11 +140,13 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     }
     @Override
     public void onScheduleTouchEventing(int p) { //날짜마다의 일정 터치 이벤트 함수
-        Toast.makeText(getContext(),"position : "+p,Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public void onUpComingScheduleTouchEventing(int p) { //다가오는 일정 터치시 이벤트 함수
-        Toast.makeText(getContext(),"Up Coming position : "+p,Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
+        startActivity(intent);
     }
 }

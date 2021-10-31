@@ -16,39 +16,29 @@ import java.util.ArrayList;
 //전체 일정리스트뷰 어뎁터
 public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.ViewHolder> {
 
-    ArrayList<ScheduleData> items = new ArrayList<ScheduleData>();
-
+    private IAllScheduleClickable iClickable;
+    ArrayList<ScheduleData> items = new ArrayList();
+    public AllScheduleAdapter(IAllScheduleClickable iClickable){
+        this.iClickable=iClickable; //참조 (이게 안되어있어서 nullException 이었음)
+    }
     public void addItem(ScheduleData item) {
         items.add(item);
     }
-
-    public void setItems(ArrayList<ScheduleData> items) {
+    public void setList(ArrayList<ScheduleData> items) {
         this.items = items;
     }
-
     public ScheduleData getItem(int position) {
         return items.get(position);
     }
-
-    public void setItem(int position, ScheduleData item) {
+    public void setItem(int position, ScheduleData item) { //아이템의 변겅
         items.set(position, item);
     }
 
     //주목 - 클릭이벤트 인터페이스 생성했는데
-    @NonNull
-    private IAllScheduleClickable iClickable;
     public interface IAllScheduleClickable{
         void onAllScheduleTouchEventing(int p);
     }
-    //수정
-    OnItemClickListener mListener = null ;
-    public interface OnItemClickListener {
-        void onItemClick(View v, int position) ;
-    }
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mListener = listener ;
-    }
-    //위쪽 부분은 지워도 될 듯
+
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -80,13 +70,10 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
         TextView place;
         public ViewHolder(View itemView) {
             super(itemView);
-
             promiseName = itemView.findViewById(R.id.scheduleTitle_TextView);
             participants = itemView.findViewById(R.id.countOfParty_TextView);
             time = itemView.findViewById(R.id.time_TextView);
             place = itemView.findViewById(R.id.place_TextView);
-
-
         }
         public void SetItem(ScheduleData item){ //각 리스트뷰에 데이터클래스의 속성 대입
             promiseName.setText(item.getPromise_name());
