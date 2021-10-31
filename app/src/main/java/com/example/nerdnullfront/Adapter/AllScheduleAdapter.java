@@ -40,7 +40,15 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     public interface IAllScheduleClickable{
         void onAllScheduleTouchEventing(int p);
     }
-
+    //수정
+    OnItemClickListener mListener = null ;
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position) ;
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
+    //위쪽 부분은 지워도 될 듯
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -77,6 +85,8 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
             participants = itemView.findViewById(R.id.countOfParty_TextView);
             time = itemView.findViewById(R.id.time_TextView);
             place = itemView.findViewById(R.id.place_TextView);
+
+
         }
         public void SetItem(ScheduleData item){ //각 리스트뷰에 데이터클래스의 속성 대입
             promiseName.setText(item.getPromise_name());

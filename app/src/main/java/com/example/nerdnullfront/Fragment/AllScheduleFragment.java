@@ -1,5 +1,6 @@
 package com.example.nerdnullfront.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.nerdnullfront.Activity.MainActivity;
+import com.example.nerdnullfront.Activity.MyPageActivity;
+import com.example.nerdnullfront.Activity.PromiseDetailActivity;
 import com.example.nerdnullfront.Adapter.AllScheduleAdapter;
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
@@ -56,6 +60,8 @@ public class AllScheduleFragment extends Fragment implements AllScheduleAdapter.
     @Override
     public void onAllScheduleTouchEventing(int p) {
         //주목 - 이 메시지라도 떠야 하는데 왜 안뜨는걸까 / 누르면 어플 강제종료
-        Toast.makeText(getContext(),"이게 나타나면 클릭 이벤트 된건가: "+p,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getCo햣 ㅁtext(),"이게 나타나면 클릭 이벤트 된건가: "+p,Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
+        startActivity(intent);
     }
 }
