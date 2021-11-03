@@ -3,6 +3,7 @@
     package="com.example.nerdnullfront">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".SDKHandler.CustomApplication"
@@ -31,6 +32,7 @@
         <activity android:name=".Activity.MyPageActivity" />
         <activity android:name=".Activity.PromiseDetailActivity" />
         <activity android:name=".Activity.PromiseAddActivity"/>
+        <activity android:name=".Activity.PlacePickUpActivity"/>
     </application>
 
 </manifest>
