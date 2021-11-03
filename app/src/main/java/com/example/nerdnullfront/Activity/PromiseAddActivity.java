@@ -2,9 +2,11 @@ package com.example.nerdnullfront.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -43,8 +45,12 @@ public class PromiseAddActivity extends AppCompatActivity {
         addPlaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PromiseAddActivity.this,PlacePickUpActivity.class);
-                activityStarter.launch(intent);
+                if(checkLocationServicesStatus()) {
+                    Intent intent = new Intent(PromiseAddActivity.this, PlacePickUpActivity.class);
+                    activityStarter.launch(intent);
+                }
+                else
+                    Toast.makeText(PromiseAddActivity.this, "GPS를 켜주세요.", Toast.LENGTH_SHORT).show();
             }
         });
         addScheduleBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,5 +59,10 @@ public class PromiseAddActivity extends AppCompatActivity {
                 //스케줄 추가
             }
         });
+    }
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 }

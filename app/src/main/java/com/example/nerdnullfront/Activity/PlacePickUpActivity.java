@@ -25,7 +25,6 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
     private MapView mapView;
     private ViewGroup searchBox;
     private Button decisionBtn,naviModeBtn;
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
     @Override
@@ -39,7 +38,7 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
            checkRunTimePermission();
         } else {
             // GPS가 꺼져있을 경우
-            Toast.makeText(this, "GPS를 켜주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "GPS가 작동하지 않습니다. 원활안 이용이 어려울 수 있습니다.", Toast.LENGTH_SHORT).show();
         }
     }
     public boolean checkLocationServicesStatus() {
@@ -135,12 +134,6 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
                 }
             }
         });
-    }
-    public void getCoordinate(){
-
-    }
-    public void moveMapToCoordinate(){
-
     }
 
     @Override
