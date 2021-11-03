@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <TextView
+            android:id="@+id/searchedPlace"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="검색하기"

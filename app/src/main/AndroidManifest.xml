@@ -33,6 +33,7 @@
         <activity android:name=".Activity.PromiseDetailActivity" />
         <activity android:name=".Activity.PromiseAddActivity"/>
         <activity android:name=".Activity.PlacePickUpActivity"/>
+        <activity android:name=".Activity.SearchPlaceActivity"/>
     </application>
 
 </manifest>

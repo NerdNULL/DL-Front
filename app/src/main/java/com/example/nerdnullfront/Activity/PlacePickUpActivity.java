@@ -1,14 +1,21 @@
 package com.example.nerdnullfront.Activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,14 +24,17 @@ import androidx.core.content.ContextCompat;
 
 import com.example.nerdnullfront.R;
 
+import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 public class PlacePickUpActivity extends AppCompatActivity implements MapView.CurrentLocationEventListener,
         MapView.MapViewEventListener{
     private MapView mapView;
+    private TextView placeName;
     private ViewGroup searchBox;
     private Button decisionBtn,naviModeBtn;
+    private ActivityResultLauncher<Intent> activityStarter;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
     @Override
@@ -104,17 +114,43 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
     }
 
     public void setID() {
+        placeName=findViewById(R.id.searchedPlace);
         mapView = findViewById(R.id.map_view);
         mapView.setMapViewEventListener(this);
         searchBox = findViewById(R.id.searchBox);
         decisionBtn = findViewById(R.id.setPlaceBtn);
         naviModeBtn = findViewById(R.id.turnHeadingModeBtn);
+        activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode()== Activity.RESULT_OK){
+                            //장소 반환
+                            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+                            Intent intent=result.getData();
+                            //위치 마킹할 것.
+                            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(intent.getDoubleExtra("latitude",0),
+                                    intent.getDoubleExtra("longitude",0)),3,true);
+                            placeName.setText(intent.getStringExtra("placeName"));
+                            MapPOIItem marker = new MapPOIItem();
+                            marker.setItemName(intent.getStringExtra("placeName"));
+                            marker.setTag(0);
+                            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(intent.getDoubleExtra("latitude",0),
+                                    intent.getDoubleExtra("longitude",0)));
+                            marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                            marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+                            mapView.addPOIItem(marker);
+                        }
+
+                    }
+                });
     }
     public void setEvents(){
         searchBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PlacePickUpActivity.this,"touch",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(PlacePickUpActivity.this,SearchPlaceActivity.class);
+                activityStarter.launch(intent);
             }
         });
         decisionBtn.setOnClickListener(new View.OnClickListener() {
