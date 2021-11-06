@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="12dp"
@@ -66,9 +66,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:hint="날짜"
-                    android:textSize="15sp"
                     android:inputType="date"
-                    />
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/editTextTime"
@@ -178,10 +177,10 @@
                 android:id="@+id/myDetailMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="입력"
-                android:textSize="15sp"
                 android:ems="10"
-                android:inputType="number" />
+                android:hint="입력"
+                android:inputType="number"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
