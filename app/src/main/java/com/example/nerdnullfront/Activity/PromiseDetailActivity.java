@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -97,11 +98,13 @@ public class PromiseDetailActivity extends AppCompatActivity {
         FeedTemplate feedTemplate = new FeedTemplate(new Content(
                 "초대되었습니다!",
                 "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-                new Link("https://www.naver.com")));
+                new Link("https://developers.kakao.com","https://developers.kakao.com")),null,null);
         LinkClient.getInstance().defaultTemplate(this, feedTemplate, new Function2<LinkResult, Throwable, Unit>() {
             @Override
             public Unit invoke(LinkResult linkResult, Throwable throwable) {
                 startActivity(linkResult.getIntent());
+                Log.w("MSGAPIERROR", "Warning Msg: "+linkResult.getWarningMsg());
+                Log.w("MSGAPIERROR", "Argument Msg: "+linkResult.getArgumentMsg());
                 return null;
             }
         });
