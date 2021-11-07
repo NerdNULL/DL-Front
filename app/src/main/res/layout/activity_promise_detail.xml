@@ -3,7 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -243,5 +249,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/checked" />
-    </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
