@@ -9,6 +9,9 @@ import com.kakao.auth.IApplicationConfig;
 import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
+import com.kakao.sdk.common.KakaoSdk;
+
+
 //카카오 SDK를 사용할 때 설정값을 설정해줘야한다. Application을 커스텀해야함.
 public class CustomApplication extends Application
 {
@@ -80,6 +83,7 @@ public class CustomApplication extends Application
         instance = this;
 
         KakaoSDK.init(new KakaoSDKAdapter());
+        KakaoSdk.init(this, "eb61e62ae286fd1bce3e8fd771c638ea");
     }
 
     @Override

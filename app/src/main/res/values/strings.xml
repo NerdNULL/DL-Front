@@ -2,5 +2,5 @@
     <string name="app_name">nerdNullFront</string>
     <string name = "kakao_app_key">eb61e62ae286fd1bce3e8fd771c638ea</string>
     <string name ="kakao_scheme">kakaoeb61e62ae286fd1bce3e8fd771c638ea</string>
-    <string name="kakaolink_host">kakaolink</string>
+    <string name="kakaolink_host">kakaolink.com</string>
 </resources>
