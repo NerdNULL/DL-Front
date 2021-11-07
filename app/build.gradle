@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.nerdnullfront"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -42,5 +43,9 @@ dependencies {
     implementation files('libs/libDaumMapAndroid.jar')
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.kakao.sdk:v2-link:2.8.2"
+    implementation "com.kakao.sdk:v2-user:2.8.2" // 카카오 로그인
+    implementation "com.kakao.sdk:v2-talk:2.8.2" // 친구, 메시지(카카오톡)
+    implementation "com.kakao.sdk:v2-story:2.8.2" // 카카오스토리
+    implementation "com.kakao.sdk:v2-link:2.8.2" // 메시지(카카오링크)
+    implementation "com.kakao.sdk:v2-navi:2.8.2" // 카카오내비
 }
