@@ -36,6 +36,8 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
     private Button decisionBtn,naviModeBtn;
     private ActivityResultLauncher<Intent> activityStarter;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
+    private Double longitude=null,latitude=null;
+    private String pickedPlaceName=null;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION};
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,15 +130,17 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
                             //장소 반환
                             mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
                             Intent intent=result.getData();
+                            longitude=intent.getDoubleExtra("longitude",0);
+                            latitude=intent.getDoubleExtra("latitude",0);
+                            pickedPlaceName=intent.getStringExtra("placeName");
                             //위치 마킹할 것.
-                            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(intent.getDoubleExtra("latitude",0),
-                                    intent.getDoubleExtra("longitude",0)),3,true);
-                            placeName.setText(intent.getStringExtra("placeName"));
+                            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(latitude,
+                                    longitude),3,true);
+                            placeName.setText(pickedPlaceName);
                             MapPOIItem marker = new MapPOIItem();
-                            marker.setItemName(intent.getStringExtra("placeName"));
+                            marker.setItemName(pickedPlaceName);
                             marker.setTag(0);
-                            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(intent.getDoubleExtra("latitude",0),
-                                    intent.getDoubleExtra("longitude",0)));
+                            marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
                             marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
                             marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
                             mapView.addPOIItem(marker);
@@ -156,9 +160,14 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
         decisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(pickedPlaceName==null) {
+                    Toast.makeText(PlacePickUpActivity.this,"먼저 장소를 선택해주세요.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent=new Intent();
-                //intent.putExtra("");
-                //setResult();
+                intent.putExtra("pickedPlaceName",pickedPlaceName);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
         naviModeBtn.setOnClickListener(new View.OnClickListener() {

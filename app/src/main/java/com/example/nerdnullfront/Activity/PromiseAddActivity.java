@@ -6,6 +6,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -19,6 +20,8 @@ import com.example.nerdnullfront.R;
 public class PromiseAddActivity extends AppCompatActivity {
     private Button addPlaceBtn,addScheduleBtn;
     private ActivityResultLauncher<Intent> activityStarter;
+    private EditText myDetailPlace,myDetailSubject,myDetailDate,myDetailTime,
+            myDetailParticipants,myDetailMoney,myMemo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,15 @@ public class PromiseAddActivity extends AppCompatActivity {
     public void setID(){
         addPlaceBtn=findViewById(R.id.app_map_button);
         addScheduleBtn=findViewById(R.id.checked_button);
+        myDetailPlace=findViewById(R.id.myDetailPlace);
+        myDetailSubject=findViewById(R.id.myDetailSubject);
+        myDetailDate=findViewById(R.id.myDetailDate);
+        myDetailTime=findViewById(R.id.editTextTime);
+        myDetailParticipants=findViewById(R.id.myDetailParticipants);
+        myDetailMoney=findViewById(R.id.myDetailMoney);
+        myMemo=findViewById(R.id.myMemo);
+
+
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -37,6 +49,7 @@ public class PromiseAddActivity extends AppCompatActivity {
                         if(result.getResultCode()== Activity.RESULT_OK){
                             //장소 반환
                             Intent intent=result.getData();
+                            myDetailPlace.setText(intent.getStringExtra("pickedPlaceName"));
                         }
                     }
                 });

@@ -6,6 +6,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -19,6 +20,8 @@ import com.example.nerdnullfront.R;
 public class PromiseDetailActivity extends AppCompatActivity {
     private Button addPlaceBtn,saveBtn,deleteBtn;
     private ActivityResultLauncher<Intent> activityStarter;
+    private EditText myDetailPlace,myDetailSubject,myDetailDate,myDetailTime,
+            myDetailParticipants,myDetailMoney,myMemo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,13 @@ public class PromiseDetailActivity extends AppCompatActivity {
         addPlaceBtn=findViewById(R.id.app_map_button);
         saveBtn=findViewById(R.id.checked_button);
         deleteBtn=findViewById(R.id.delete_button);
+        myDetailPlace=findViewById(R.id.myDetailPlace);
+        myDetailSubject=findViewById(R.id.myDetailSubject);
+        myDetailDate=findViewById(R.id.myDetailDate);
+        myDetailTime=findViewById(R.id.editTextTime);
+        myDetailParticipants=findViewById(R.id.myDetailParticipants);
+        myDetailMoney=findViewById(R.id.myDetailMoney);
+        myMemo=findViewById(R.id.myMemo);
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -37,6 +47,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
                         if(result.getResultCode()== Activity.RESULT_OK){
                             //장소 반환
                             Intent intent=result.getData();
+                            myDetailPlace.setText(intent.getStringExtra("pickedPlaceName"));
                         }
                     }
                 });
@@ -56,13 +67,13 @@ public class PromiseDetailActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //스케줄 업데이트
+                //스케줄 업데이트 - 백엔드와 테스트 필요
             }
         });
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //스케줄 삭제
+                //스케줄 삭제 - 백엔드와 테스트 필요
             }
         });
     }
