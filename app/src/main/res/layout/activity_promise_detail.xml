@@ -158,7 +158,6 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_weight="0.5"
-                    android:onClick="btn_addClick"
                     android:background="@drawable/plus_sign" />
 
             </LinearLayout>

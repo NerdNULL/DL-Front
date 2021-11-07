@@ -39,7 +39,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
         setEvents();
     }
     public void setID(){
-        addParticipants=findViewById(R.id.button3);
+        addParticipants=findViewById(R.id.button_add);
         addPlaceBtn=findViewById(R.id.app_map_button);
         saveBtn=findViewById(R.id.checked_button);
         deleteBtn=findViewById(R.id.delete_button);
