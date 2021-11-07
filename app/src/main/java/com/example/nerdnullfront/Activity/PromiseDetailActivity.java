@@ -1,7 +1,6 @@
 package com.example.nerdnullfront.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -15,21 +14,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.kakao.sdk.template.model.Content;
-import com.kakao.sdk.template.model.FeedTemplate;
-import com.kakao.sdk.template.model.FeedTemplate.*;
-import com.kakao.sdk.template.model.Button.*;
-import com.kakao.sdk.template.model.Content.*;
-import com.kakao.sdk.template.model.ItemContent.*;
-import com.kakao.sdk.template.*;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import com.kakao.sdk.link.*;
-import com.kakao.sdk.*;
 import com.example.nerdnullfront.R;
-
 
 public class PromiseDetailActivity extends AppCompatActivity {
     private Button addPlaceBtn,saveBtn,deleteBtn;
@@ -85,17 +70,5 @@ public class PromiseDetailActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    public void btn_addClick() {
-        /*
-        Map<String, String> templateIds= new Map<String, String>();
-        //int templateId = templ
-        String url = "https://developers.kakao.com";
-        Long templateId = templateIds["customMemo"];
-        Context context= getApplicationContext();git
-        if(LinkClient.getInstance().isKakaoLinkAvailable(context)) {
-            LinkClient.getInstance().scrapTemplate(context, url, templateId);
-        */
     }
 }
