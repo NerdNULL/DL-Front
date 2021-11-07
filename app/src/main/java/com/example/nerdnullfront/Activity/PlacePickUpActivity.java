@@ -156,7 +156,9 @@ public class PlacePickUpActivity extends AppCompatActivity implements MapView.Cu
         decisionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //장소 결정
+                Intent intent=new Intent();
+                //intent.putExtra("");
+                //setResult();
             }
         });
         naviModeBtn.setOnClickListener(new View.OnClickListener() {
