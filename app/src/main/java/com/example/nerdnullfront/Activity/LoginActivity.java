@@ -28,14 +28,14 @@ import java.security.MessageDigest;
 public class LoginActivity extends AppCompatActivity {
     private ImageView logoImage;
     private ISessionCallback sessionCallback;
-
+    private String action=null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setID();
-        getAppKeyHash();
-
+        //getAppKeyHash();
+        action=getIntent().getAction(); //능동적으로 킨건지, 초대링크를 탄건지 파악
     }
     public void setID(){
         logoImage=findViewById(R.id.logoImage_LoginActivity);
@@ -63,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("name",result.getKakaoAccount().getProfile().getNickname()); //닉네임
                         intent.putExtra("profileImage",result.getKakaoAccount().getProfile().getProfileImageUrl()); //프로필 이미지
                         intent.putExtra("email",result.getKakaoAccount().getEmail()); //프로필 이미지
+                        if(Intent.ACTION_VIEW.equalsIgnoreCase(action)){
+                            //딥링크를 타고옴
+                            intent.putExtra("invited",true);
+                        }
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                         finish();

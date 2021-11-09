@@ -23,6 +23,9 @@ import com.kakao.sdk.template.model.Content;
 import com.kakao.sdk.template.model.FeedTemplate;
 import com.kakao.sdk.template.model.Link;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
@@ -32,12 +35,14 @@ public class PromiseDetailActivity extends AppCompatActivity {
     private EditText myDetailPlace,myDetailSubject,myDetailDate,myDetailTime,
             myDetailParticipants,myDetailMoney,myMemo;
     private Button addParticipants;
+    private String nickName=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promise_detail);
         setID();
         setEvents();
+        nickName=getIntent().getStringExtra("nickName");
     }
     public void setID(){
         addParticipants=findViewById(R.id.button_add);
@@ -96,9 +101,17 @@ public class PromiseDetailActivity extends AppCompatActivity {
     }
     public void sendLink(){
         FeedTemplate feedTemplate = new FeedTemplate(new Content(
-                "초대되었습니다!",
+                nickName+" 님이 귀하를 약속에 초대하였습니다!",
                 "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
-                new Link("https://developers.kakao.com","https://developers.kakao.com")),null,null);
+                new Link(null, null)), null, null,
+                Arrays.asList(
+                        new com.kakao.sdk.template.model.Button("초대 확인하기",new Link(
+                                R.string.kakao_scheme+"://"+R.string.kakaolink_host,R.string.kakao_scheme+"://"+R.string.kakaolink_host,
+                                new HashMap<String,String>(){{
+                                    put("scheduleMaker",nickName); //약속을 만드는 사람의 닉네임
+                                }}
+                        )))
+        );
         LinkClient.getInstance().defaultTemplate(this, feedTemplate, new Function2<LinkResult, Throwable, Unit>() {
             @Override
             public Unit invoke(LinkResult linkResult, Throwable throwable) {

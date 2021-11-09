@@ -39,6 +39,10 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     private RecyclerView scheduleListView,upComingScheduleListView;
     private SlidingUpPanelLayout slider;
     private FloatingActionButton floatingActionButton;
+    private String nickName=null;
+    public CalendarFragment(String nickName){
+        this.nickName=nickName;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -113,6 +117,8 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(), PromiseAddActivity.class);
+                if(nickName!=null)
+                    intent.putExtra("nickName",nickName);
                 startActivity(intent);
                 //약속 추가화면
             }
@@ -141,12 +147,16 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     @Override
     public void onScheduleTouchEventing(int p) { //날짜마다의 일정 터치 이벤트 함수
         Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
+        if(nickName!=null)
+            intent.putExtra("nickName",nickName);
         startActivity(intent);
     }
 
     @Override
     public void onUpComingScheduleTouchEventing(int p) { //다가오는 일정 터치시 이벤트 함수
         Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
+        if(nickName!=null)
+            intent.putExtra("nickName",nickName);
         startActivity(intent);
     }
 }

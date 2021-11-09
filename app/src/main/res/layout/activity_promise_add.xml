@@ -124,46 +124,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/DetailParticipants"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="인원"
-                android:textColor="#000000"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/myDetailParticipants"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="12"
-                    android:hint="입력"
-                    android:textSize="15sp" />
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/plus_sign" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
