@@ -30,7 +30,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 public class PromiseAddActivity extends AppCompatActivity {
-    private Button addPlaceBtn,addScheduleBtn;
+    private Button addPlaceBtn,addScheduleBtn,payBtn;
     private ActivityResultLauncher<Intent> activityStarter;
     private EditText myDetailPlace,myDetailSubject,myDetailDate,myDetailTime,myDetailMoney,myMemo;
     private String nickName=null;
@@ -42,6 +42,7 @@ public class PromiseAddActivity extends AppCompatActivity {
         setEvents();
         nickName=getIntent().getStringExtra("nickName");
 
+
     }
     public void setID(){
         addPlaceBtn=findViewById(R.id.app_map_button);
@@ -52,7 +53,7 @@ public class PromiseAddActivity extends AppCompatActivity {
         myDetailTime=findViewById(R.id.editTextTime);
         myDetailMoney=findViewById(R.id.myDetailMoney);
         myMemo=findViewById(R.id.myMemo);
-
+        payBtn = findViewById(R.id.pay_button);
 
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -67,6 +68,28 @@ public class PromiseAddActivity extends AppCompatActivity {
                 });
     }
     public void setEvents(){
+
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // EditText에 입력한 상품 정보를 가져온다.
+                //String name = myDetailMoney.getText().toString();
+                String price = myDetailMoney.getText().toString();
+                if(price.equals("")){
+                    Toast.makeText(PromiseAddActivity.this,"먼저 금액을 입력해주세요.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 결제가 이루어지는 PayActivity를 생성한다.
+                // - 생성자를 이용하여 상품 정보를 입력한다.
+                PayActivity payActivity = new PayActivity(price);
+
+                // Intent로 새로운 Activity를 실행한다.
+                Intent intent = new Intent(PromiseAddActivity.this, payActivity.getClass());
+                startActivity(intent);
+            }
+        });
+
         addPlaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +133,9 @@ public class PromiseAddActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)

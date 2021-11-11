@@ -139,14 +139,28 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/myDetailMoney"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="입력"
-                android:inputType="number"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/myDetailMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:hint="입력"
+                    android:inputType="number"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/pay_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="2"
+
+                    android:background="@drawable/payment_icon_yellow_medium" />
+            </LinearLayout>
 
         </LinearLayout>
 
