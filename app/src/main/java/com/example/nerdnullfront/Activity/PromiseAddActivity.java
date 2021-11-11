@@ -73,7 +73,7 @@ public class PromiseAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // EditText에 입력한 상품 정보를 가져온다.
-                //String name = myDetailMoney.getText().toString();
+                //String name = myDetailMgitoney.getText().toString();
                 String price = myDetailMoney.getText().toString();
                 if(price.equals("")){
                     Toast.makeText(PromiseAddActivity.this,"먼저 금액을 입력해주세요.",Toast.LENGTH_SHORT).show();
