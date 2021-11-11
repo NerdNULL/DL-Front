@@ -17,6 +17,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nerdnullfront.R;
+import com.example.nerdnullfront.ServerInterface.RemoveScheduleServerRequestAPI;
+import com.example.nerdnullfront.ServerInterface.UpdateScheduleServerRequestAPI;
+import com.example.nerdnullfront.ServerResponseDataSet.RemoveScheduleResponseData;
+import com.example.nerdnullfront.ServerResponseDataSet.UpdateScheduleResponseData;
 import com.kakao.sdk.link.LinkClient;
 import com.kakao.sdk.link.model.LinkResult;
 import com.kakao.sdk.template.model.Content;
@@ -28,6 +32,11 @@ import java.util.HashMap;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PromiseDetailActivity extends AppCompatActivity {
     private Button addPlaceBtn,saveBtn,deleteBtn;
@@ -36,6 +45,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
             myDetailParticipants,myDetailMoney,myMemo;
     private Button addParticipants;
     private String nickName=null;
+    private Retrofit retrofit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +66,10 @@ public class PromiseDetailActivity extends AppCompatActivity {
         myDetailParticipants=findViewById(R.id.myDetailParticipants);
         myDetailMoney=findViewById(R.id.myDetailMoney);
         myMemo=findViewById(R.id.myMemo);
+        retrofit = new Retrofit.Builder() // Retrofit 구성
+                .baseUrl("") //요청 URL
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -84,12 +98,14 @@ public class PromiseDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //스케줄 업데이트 - 백엔드와 테스트 필요
+                requestUpdateScheduleResponse();
             }
         });
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //스케줄 삭제 - 백엔드와 테스트 필요
+                requestRemoveScheduleResponse();
             }
         });
         addParticipants.setOnClickListener(new View.OnClickListener() {
@@ -127,5 +143,35 @@ public class PromiseDetailActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+    public void requestUpdateScheduleResponse(){
+        UpdateScheduleServerRequestAPI api = retrofit.create(UpdateScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
+        Call<UpdateScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        // API 서버에 요청
+        call.enqueue(new Callback<UpdateScheduleResponseData>() {
+            @Override
+            public void onResponse(Call<UpdateScheduleResponseData> call, Response<UpdateScheduleResponseData> response) {
+                //reponse.body().객체
+            }
+            @Override
+            public void onFailure(Call<UpdateScheduleResponseData> call, Throwable t) {
+
+            }
+        });
+    }
+    public void requestRemoveScheduleResponse(){
+        RemoveScheduleServerRequestAPI api = retrofit.create(RemoveScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
+        Call<RemoveScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        // API 서버에 요청
+        call.enqueue(new Callback<RemoveScheduleResponseData>() {
+            @Override
+            public void onResponse(Call<RemoveScheduleResponseData> call, Response<RemoveScheduleResponseData> response) {
+                //reponse.body().객체
+            }
+            @Override
+            public void onFailure(Call<RemoveScheduleResponseData> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-package com.example.nerdnullfront.Data;
+package com.example.nerdnullfront.ServerResponseDataSet;
 
 import java.util.List;
 

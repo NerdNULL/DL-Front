@@ -1,4 +1,4 @@
-package com.example.nerdnullfront.Data;
+package com.example.nerdnullfront.ServerResponseDataSet;
 
 public class AddressPlace {
     public String place_name;
