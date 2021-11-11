@@ -27,12 +27,6 @@ public class AllScheduleAdapter extends RecyclerView.Adapter<AllScheduleAdapter.
     public void setList(ArrayList<ScheduleData> items) {
         this.items = items;
     }
-    public ScheduleData getItem(int position) {
-        return items.get(position);
-    }
-    public void setItem(int position, ScheduleData item) { //아이템의 변겅
-        items.set(position, item);
-    }
 
     //주목 - 클릭이벤트 인터페이스 생성했는데
     public interface IAllScheduleClickable{

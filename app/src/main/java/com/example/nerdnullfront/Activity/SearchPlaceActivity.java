@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Adapter.PlaceListAdapter;
-import com.example.nerdnullfront.Data.AddressPlace;
-import com.example.nerdnullfront.Data.AddressResponseData;
+import com.example.nerdnullfront.ServerResponseDataSet.AddressPlace;
+import com.example.nerdnullfront.ServerResponseDataSet.AddressResponseData;
 import com.example.nerdnullfront.KakaoMapHandler.KakaoRequestAPI;
 import com.example.nerdnullfront.R;
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nerdnullfront.Data.AddressPlace;
+import com.example.nerdnullfront.ServerResponseDataSet.AddressPlace;
 import com.example.nerdnullfront.R;
 
 import java.util.List;

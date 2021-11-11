@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,12 +23,21 @@ import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
+import com.example.nerdnullfront.ServerInterface.ReadScheduleServerRequestAPI;
+import com.example.nerdnullfront.ServerResponseDataSet.ReadScheduleResponseData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CalendarFragment extends Fragment implements ScheduleAdapter.IScheduleClickable,
         UpComingScheduleAdapter.IUpComingScheduleClickable{
@@ -40,6 +48,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     private SlidingUpPanelLayout slider;
     private FloatingActionButton floatingActionButton;
     private String nickName=null;
+    private Retrofit retrofit;
     public CalendarFragment(String nickName){
         this.nickName=nickName;
     }
@@ -58,20 +67,9 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         String thisDay = (calendar.get(Calendar.YEAR))+ "." +
                 (calendar.get(Calendar.MONTH)+1) + "." +(calendar.get(Calendar.DATE));
         dayText.setText(thisDay);
-        //수정
-        /*
-        view.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
 
-                if(event.getAction() == MotionEvent.ACTION_MOVE){
-                    Toast.makeText(getContext(),"dfadfda",Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-        */
-        //수정끝
-
+        setScheduleListView(thisDay); //현재 날짜의 일정 받기
+        setUpComingScheduleListView(); //다가오는 스케줄 리스트 2개
         return view;
     }
     public void setID(View view){
@@ -82,20 +80,17 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         slider=view.findViewById(R.id.slider);
         slideArrowImage=view.findViewById(R.id.slideArrow_ImageView);
         floatingActionButton=view.findViewById(R.id.addSchedule);
-
-        //해당 날짜의 모든 일정 슬라이딩 업 레이아웃 리스트
-        setScheduleListView();
-
-        //다가오는 스케줄 리스트 2개
-        setUpComingScheduleListView();
-
+        retrofit = new Retrofit.Builder() // Retrofit 구성
+                .baseUrl("") //요청 URL
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
     public void setEvents(){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() { //캘린더의 날짜변경에 따른 이벤트
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String thisDay=""+year+"."+(month+1)+"."+dayOfMonth;
-                Toast.makeText(getContext(),""+year+"."+(month+1)+"."+dayOfMonth,Toast.LENGTH_SHORT).show();
+                setScheduleListView(thisDay);
                 dayText.setText(thisDay);
             }
         });
@@ -124,22 +119,20 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
             }
         });
     }
-    void setScheduleListView(){ //각 날짜마다의 일정정보를 업데이트
+    void setScheduleListView(String thisDay){ //각 날짜마다의 일정정보를 업데이트
         ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
-        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
-        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
-        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
-        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
-        arrayList.add(new ScheduleData("술약속","명하,선민,정훈,영웅","2021.09.12","부천"));
-        arrayList.add(new ScheduleData("회의","명하,선민,정훈,영웅","2021.09.13","부천"));
+        //
+        requestSchedulesResponseData(1,thisDay,arrayList); //각 날짜마다 업데이트
+        //
         ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
         scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         scheduleListView.setAdapter(scheduleAdapter);
     }
     void setUpComingScheduleListView(){ //다가오는 일정 2개를 미리 보여줌.
         ArrayList<UpComingScheduleData> upComingScheduleDataArrayList=new ArrayList();
-        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing1","Whenever1"));
-        upComingScheduleDataArrayList.add(new UpComingScheduleData("upComing2","Whenever2"));
+        //
+        requestSchedulesResponseData(2,upComingScheduleDataArrayList); //최신 2개만
+        //
         UpComingScheduleAdapter upComingScheduleAdapter=new UpComingScheduleAdapter(upComingScheduleDataArrayList,this);
         upComingScheduleListView.setLayoutManager(new GridLayoutManager(getContext(),2));
         upComingScheduleListView.setAdapter(upComingScheduleAdapter);
@@ -158,5 +151,35 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         if(nickName!=null)
             intent.putExtra("nickName",nickName);
         startActivity(intent);
+    }
+    public void requestSchedulesResponseData(int reqType, String thisDay, List<ScheduleData> scheduleDataList){ //각 일자에 해당하는 일정 받기
+        ReadScheduleServerRequestAPI api = retrofit.create(ReadScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
+        Call<ReadScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        // API 서버에 요청
+        call.enqueue(new Callback<ReadScheduleResponseData>() {
+            @Override
+            public void onResponse(Call<ReadScheduleResponseData> call, Response<ReadScheduleResponseData> response) {
+                //reponse.body().객체
+            }
+            @Override
+            public void onFailure(Call<ReadScheduleResponseData> call, Throwable t) {
+
+            }
+        });
+    }
+    public void requestSchedulesResponseData(int reqType, List<UpComingScheduleData> upComingScheduleDataList){ //upComming 일정받기
+        ReadScheduleServerRequestAPI api = retrofit.create(ReadScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
+        Call<ReadScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        // API 서버에 요청
+        call.enqueue(new Callback<ReadScheduleResponseData>() {
+            @Override
+            public void onResponse(Call<ReadScheduleResponseData> call, Response<ReadScheduleResponseData> response) {
+                //reponse.body().객체
+            }
+            @Override
+            public void onFailure(Call<ReadScheduleResponseData> call, Throwable t) {
+
+            }
+        });
     }
 }
