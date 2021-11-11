@@ -55,8 +55,12 @@ public class MainActivity extends AppCompatActivity{
         //초기화면은 달력 프래그먼트이다.
         fragmentManager.beginTransaction().replace(R.id.frameLayout_MainActivity,calendarFragment).commit();
         if(getIntent().getBooleanExtra("invited",false)){ //딥링크 실행시,
-            /*Intent intent=new Intent(MainActivity.this,초대화면.class);
-            startActivity(intent);*/
+            Intent intent=new Intent(MainActivity.this,InvitedActivity.class);
+            String maker=getIntent().getStringExtra("scheduleMaker");
+            String snumber=getIntent().getStringExtra("scheduleNumber");
+            intent.putExtra("scheduleMaker",maker);
+            intent.putExtra("scheduleNumber",snumber);
+            startActivity(intent);
         }
     }
     public void setID(){

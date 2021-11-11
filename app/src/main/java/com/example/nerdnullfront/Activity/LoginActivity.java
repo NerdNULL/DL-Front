@@ -66,6 +66,12 @@ public class LoginActivity extends AppCompatActivity {
                         if(Intent.ACTION_VIEW.equalsIgnoreCase(action)){
                             //딥링크를 타고옴
                             intent.putExtra("invited",true);
+                            Intent linkIntent = getIntent();
+                            //AndroidExecutionParams에서 전달했던 키값
+                            String maker = linkIntent.getData().getQueryParameter("scheduleMaker"); //스케줄 메이커
+                            String snumber = linkIntent.getData().getQueryParameter("scheduleNumber"); //스케줄 고유 번호
+                            intent.putExtra("scheduleMaker",maker);
+                            intent.putExtra("scheduleNumber",snumber);
                         }
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();

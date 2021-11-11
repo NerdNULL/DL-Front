@@ -109,6 +109,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
                                 R.string.kakao_scheme+"://"+R.string.kakaolink_host,R.string.kakao_scheme+"://"+R.string.kakaolink_host,
                                 new HashMap<String,String>(){{
                                     put("scheduleMaker",nickName); //약속을 만드는 사람의 닉네임
+                                    put("scheduleNumber",String.valueOf(3));// 스케줄 고유번호
                                 }}
                         )))
         );
