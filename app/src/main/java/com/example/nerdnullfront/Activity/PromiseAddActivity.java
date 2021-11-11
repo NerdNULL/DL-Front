@@ -54,8 +54,6 @@ public class PromiseAddActivity extends AppCompatActivity {
                 .baseUrl("") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-
     }
     public void setID(){
         addPlaceBtn=findViewById(R.id.app_map_button);
@@ -68,7 +66,6 @@ public class PromiseAddActivity extends AppCompatActivity {
         myMemo=findViewById(R.id.myMemo);
 
         payBtn = findViewById(R.id.pay_button);
-
 
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -83,7 +80,6 @@ public class PromiseAddActivity extends AppCompatActivity {
                 });
     }
     public void setEvents(){
-
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,9 +144,6 @@ public class PromiseAddActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
