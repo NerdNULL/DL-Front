@@ -152,7 +152,6 @@ public class PromiseDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UpdateScheduleResponseData> call, Response<UpdateScheduleResponseData> response) {
                 //reponse.body().객체
-                sendLink(); //초대메세지 링크보내기
             }
             @Override
             public void onFailure(Call<UpdateScheduleResponseData> call, Throwable t) {
@@ -168,7 +167,6 @@ public class PromiseDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RemoveScheduleResponseData> call, Response<RemoveScheduleResponseData> response) {
                 //reponse.body().객체
-                sendLink(); //초대메세지 링크보내기
             }
             @Override
             public void onFailure(Call<RemoveScheduleResponseData> call, Throwable t) {
