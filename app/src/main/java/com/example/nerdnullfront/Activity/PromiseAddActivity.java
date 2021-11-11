@@ -45,7 +45,7 @@ public class PromiseAddActivity extends AppCompatActivity {
     }
     public void setID(){
         addPlaceBtn=findViewById(R.id.app_map_button);
-        addScheduleBtn=findViewById(R.id.edit_button);
+        addScheduleBtn=findViewById(R.id.check_button);
         myDetailPlace=findViewById(R.id.myDetailPlace);
         myDetailSubject=findViewById(R.id.myDetailSubject);
         myDetailDate=findViewById(R.id.myDetailDate);

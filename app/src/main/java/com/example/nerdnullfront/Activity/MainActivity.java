@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity{
         //초기화면은 달력 프래그먼트이다.
         fragmentManager.beginTransaction().replace(R.id.frameLayout_MainActivity,calendarFragment).commit();
         if(getIntent().getBooleanExtra("invited",false)){ //딥링크 실행시,
-            Toast.makeText(this,"딥링크 실행",Toast.LENGTH_SHORT).show();
-           /* Intent intent=new Intent(MainActivity.this,초대화면.class);
+            /*Intent intent=new Intent(MainActivity.this,초대화면.class);
             startActivity(intent);*/
         }
     }
