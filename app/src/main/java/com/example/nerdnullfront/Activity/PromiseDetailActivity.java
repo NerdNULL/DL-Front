@@ -67,7 +67,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
         myDetailMoney=findViewById(R.id.myDetailMoney);
         myMemo=findViewById(R.id.myMemo);
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("") //요청 URL
+                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),

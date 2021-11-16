@@ -34,7 +34,7 @@ public class AllScheduleFragment extends Fragment implements AllScheduleAdapter.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.all_schedule_list_fragment,container,false);
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("") //요청 URL
+                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RecyclerView recyclerView = view.findViewById(R.id.PromiseRecycler);

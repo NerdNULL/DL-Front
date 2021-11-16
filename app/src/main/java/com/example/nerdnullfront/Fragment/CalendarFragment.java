@@ -81,7 +81,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         slideArrowImage=view.findViewById(R.id.slideArrow_ImageView);
         floatingActionButton=view.findViewById(R.id.addSchedule);
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("") //요청 URL
+                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

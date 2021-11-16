@@ -20,7 +20,7 @@ public class InvitedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invited);
         inviter=getIntent().getStringExtra("scheduleMaker");
-        sNumber=getIntent().getStringExtra("scheduleNumber");
+        sNumber=getIntent().getStringExtra("scheduleNumber"); //스케줄의 고유번호
         setID();
         setEvents();
 
@@ -54,6 +54,7 @@ public class InvitedActivity extends AppCompatActivity {
         this.inviterName.setText(inviter);
     }
     public void getInvitedScheduleData(String sNumber){
+        //고유번호로 데이터 닫아와서 뷰에 뿌릴것임.
 
     }
 }

@@ -51,7 +51,7 @@ public class PromiseAddActivity extends AppCompatActivity {
         setEvents();
         nickName=getIntent().getStringExtra("nickName");
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("") //요청 URL
+                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
