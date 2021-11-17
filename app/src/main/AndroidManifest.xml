@@ -53,6 +53,8 @@
         <activity android:name=".Activity.PlacePickUpActivity"/>
         <activity android:name=".Activity.SearchPlaceActivity"/>
         <activity android:name=".Activity.PayActivity"/>
+        <activity android:name=".Activity.DividedActivity"/>
+        <activity android:name=".Activity.RouletteActivity"/>
     </application>
 
     <!--queries에 카카오톡 패키지 추가-->

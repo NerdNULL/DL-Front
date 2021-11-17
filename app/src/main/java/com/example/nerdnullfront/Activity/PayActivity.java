@@ -1,11 +1,15 @@
 package com.example.nerdnullfront.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -14,10 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.nerdnullfront.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
+import com.example.nerdnullfront.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -121,7 +126,7 @@ public class PayActivity extends AppCompatActivity {
                 params.put("cid", "TC0ONETIME"); // 가맹점 코드
                 params.put("partner_order_id", "1001"); // 가맹점 주문 번호
                 params.put("partner_user_id", "gorany"); // 가맹점 회원 아이디
-                params.put("item_name", "ad"); // 상품 이름
+                params.put("item_name", "DonLate 약속 예치금"); // 상품 이름
                 params.put("quantity", "1"); // 상품 수량
                 params.put("total_amount", productPrice); // 상품 총액
                 params.put("tax_free_amount", "0"); // 상품 비과세
@@ -138,5 +143,68 @@ public class PayActivity extends AppCompatActivity {
                 return headers;
             }
         };
+        // 결제 요청 단계 - 통신을 받을 Response 변수
+        Response.Listener<String> approvalResponse = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Debug", response);
+            }
+        };
+
+        // 결제 요청 단계 - 통신을 넘겨줄 Request 변수
+        StringRequest approvalRequest = new StringRequest(Request.Method.POST, "https://kapi.kakao.com/v1/payment/approve", approvalResponse, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("cid", "TC0ONETIME");
+                params.put("tid", tidPin);
+                params.put("partner_order_id", "1001");
+                params.put("partner_user_id", "gorany");
+                params.put("pg_token", pgToken);
+                params.put("total_amount", productPrice);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "KakaoAK " + "3d2041de7346cef505cb721950424e8a");
+                return headers;
+            }
+        };
+
+        // URL 변경시 발생 이벤트
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Log.e("Debug", "url" + url);
+
+            if (url != null && url.contains("pg_token=")) {
+                String pg_Token = url.substring(url.indexOf("pg_token=") + 9);
+                pgToken = pg_Token;
+
+                requestQueue.add(approvalRequest);
+
+            }
+
+            else if (url != null && url.startsWith("intent://")) {
+                try {
+                    Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
+                    Intent existPackage = getPackageManager().getLaunchIntentForPackage(intent.getPackage());
+                    if (existPackage != null) {
+                        startActivity(intent);
+                    }
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            //view.loadUrl(url);
+            //view.loadUrl("https://developers.kakao.com/");
+            Toast.makeText(PayActivity.this,"결제가 완료되었습니다.",Toast.LENGTH_LONG).show();
+            finish();
+
+            return false;
+        }
     }
 }
