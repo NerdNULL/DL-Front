@@ -14,7 +14,8 @@ public class InvitedActivity extends AppCompatActivity {
     private Button button_ok;
     private Button button_reject;
     private String inviter,sNumber;
-    private TextView inviterName;
+    private TextView inviterName,myDetailSubject,myDetailDate,myDetailTime,myDetailPlace,myDetailParticipants
+            ,myDetailMoney,myMemo;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,13 @@ public class InvitedActivity extends AppCompatActivity {
         button_ok = findViewById(R.id.check_button); //수락버튼
         button_reject = findViewById(R.id.delete_button); //거절버튼
         inviterName=findViewById(R.id.InviterName);
+        myDetailSubject=findViewById(R.id.myDetailSubject);
+        myDetailDate=findViewById(R.id.myDetailDate);
+        myDetailTime=findViewById(R.id.myDetailTime);
+        myDetailPlace=findViewById(R.id.myDetailPlace);
+        myDetailParticipants=findViewById(R.id.myDetailParticipants);
+        myDetailMoney=findViewById(R.id.myDetailMoney);
+        myMemo=findViewById(R.id.myMemo);
     }
     public void setEvents(){
         button_ok.setOnClickListener(new View.OnClickListener() { //수락시,
@@ -39,6 +47,7 @@ public class InvitedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(InvitedActivity.this,"수락되었습니다.",Toast.LENGTH_SHORT).show();
                 //update Participants
+
                 finish();
             }
         });
@@ -55,6 +64,5 @@ public class InvitedActivity extends AppCompatActivity {
     }
     public void getInvitedScheduleData(String sNumber){
         //고유번호로 데이터 닫아와서 뷰에 뿌릴것임.
-
     }
 }
