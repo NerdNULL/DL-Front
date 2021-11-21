@@ -134,7 +134,7 @@ public class PromiseAddActivity extends AppCompatActivity {
     public void sendLink(){
         FeedTemplate feedTemplate = new FeedTemplate(new Content(
                 nickName+" 님이 귀하를 약속에 초대하였습니다!",
-                "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+                "https://drive.google.com/file/d/1nFX83bl7FBcb3RSdGK-y3DLZAZ_HNjgc/view?usp=sharing/",
                 new Link(null, null)), null, null,
                 Arrays.asList(
                         new com.kakao.sdk.template.model.Button("초대 확인하기",new Link(
