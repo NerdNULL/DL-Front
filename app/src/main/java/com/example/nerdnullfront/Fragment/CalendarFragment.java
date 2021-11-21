@@ -40,7 +40,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CalendarFragment extends Fragment implements ScheduleAdapter.IScheduleClickable,
-        UpComingScheduleAdapter.IUpComingScheduleClickable{
+        UpComingScheduleAdapter.IUpComingScheduleClickable {
     private TextView dayText;
     private ImageView slideArrowImage;
     private CalendarView calendarView;
@@ -49,6 +49,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     private FloatingActionButton floatingActionButton;
     private String nickName=null;
     private Retrofit retrofit;
+    ArrayList<ScheduleData> arrayList=new ArrayList();
     public CalendarFragment(String nickName){
         this.nickName=nickName;
     }
@@ -90,7 +91,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String thisDay=""+year+"."+(month+1)+"."+dayOfMonth;
-                setScheduleListView(thisDay);
+                //setScheduleListView(thisDay);
                 dayText.setText(thisDay);
             }
         });
@@ -120,10 +121,14 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         });
     }
     void setScheduleListView(String thisDay){ //각 날짜마다의 일정정보를 업데이트
-        ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
+        //ArrayList<ScheduleData> arrayList=new ArrayList(); //각 일정들의 정보를 담아야함!!
         //
-        requestSchedulesResponseData(1,thisDay,arrayList); //각 날짜마다 업데이트
+        //requestSchedulesResponseData(1,thisDay,arrayList); //각 날짜마다 업데이트
         //
+        arrayList.add(new ScheduleData("회식","김강산, 이선민, 황명하","2021-12-10","12:00",
+                "역곡","2000","역곡역 앞 시나브로"));
+        arrayList.add(new ScheduleData("토익 스터디","김정훈, 김영웅","2021-12-10","13:00",
+                "홍대","1500","스터디 카페"));
         ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
         scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         scheduleListView.setAdapter(scheduleAdapter);
@@ -131,17 +136,20 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     void setUpComingScheduleListView(){ //다가오는 일정 2개를 미리 보여줌.
         ArrayList<UpComingScheduleData> upComingScheduleDataArrayList=new ArrayList();
         //
-        requestSchedulesResponseData(2,upComingScheduleDataArrayList); //최신 2개만
+        //requestSchedulesResponseData(2,upComingScheduleDataArrayList); //최신 2개만
         //
+        upComingScheduleDataArrayList.add(new UpComingScheduleData("회식","2021-11-29"));
+        upComingScheduleDataArrayList.add(new UpComingScheduleData("토익 스터디","2021-12-03"));
         UpComingScheduleAdapter upComingScheduleAdapter=new UpComingScheduleAdapter(upComingScheduleDataArrayList,this);
         upComingScheduleListView.setLayoutManager(new GridLayoutManager(getContext(),2));
         upComingScheduleListView.setAdapter(upComingScheduleAdapter);
     }
     @Override
-    public void onScheduleTouchEventing(int p) { //날짜마다의 일정 터치 이벤트 함수
+    public void onScheduleTouchEventing(ScheduleData sd) { //날짜마다의 일정 터치 이벤트 함수
         Intent intent=new Intent(getActivity(), PromiseDetailActivity.class);
         if(nickName!=null)
             intent.putExtra("nickName",nickName);
+        intent.putExtra("scData",sd);
         startActivity(intent);
     }
 
@@ -181,5 +189,11 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
 
             }
         });
+    }
+    public void addSchedule(ScheduleData data){
+        arrayList.add(data);
+        ScheduleAdapter scheduleAdapter=new ScheduleAdapter(arrayList,this);
+        scheduleListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        scheduleListView.setAdapter(scheduleAdapter);
     }
 }

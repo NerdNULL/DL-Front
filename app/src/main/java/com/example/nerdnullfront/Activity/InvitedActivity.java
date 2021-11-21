@@ -1,5 +1,6 @@
 package com.example.nerdnullfront.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 //초대 수락거절 화면
 public class InvitedActivity extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class InvitedActivity extends AppCompatActivity {
     private String inviter,sNumber;
     private TextView inviterName,myDetailSubject,myDetailDate,myDetailTime,myDetailPlace,myDetailParticipants
             ,myDetailMoney,myMemo;
+    private ScheduleData data;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +27,19 @@ public class InvitedActivity extends AppCompatActivity {
         sNumber=getIntent().getStringExtra("scheduleNumber"); //스케줄의 고유번호
         setID();
         setEvents();
-
         setInviter(inviter);
-        Toast.makeText(this, sNumber,Toast.LENGTH_SHORT).show();
-        getInvitedScheduleData(sNumber); //서버로부터 데이터 받아옴
+
+        data=(ScheduleData) getIntent().getSerializableExtra("targetSchedule");
+        myDetailSubject.setText(data.getPromise_name());
+        myDetailParticipants.setText(data.getParticipants());
+        myDetailDate.setText(data.getDate());
+        myDetailTime.setText(data.getTime());
+        myDetailPlace.setText(data.getPlace());
+        myDetailMoney.setText(data.getMoney());
+        myMemo.setText(data.getMemo());
+
+       // Toast.makeText(this, sNumber,Toast.LENGTH_SHORT).show();
+       // getInvitedScheduleData(sNumber); //서버로부터 데이터 받아옴
     }
     public void setID(){
         button_ok = findViewById(R.id.check_button); //수락버튼
@@ -47,7 +59,9 @@ public class InvitedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(InvitedActivity.this,"수락되었습니다.",Toast.LENGTH_SHORT).show();
                 //update Participants
-
+                Intent intent=new Intent();
+                intent.putExtra("targetSchedule",data);
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });

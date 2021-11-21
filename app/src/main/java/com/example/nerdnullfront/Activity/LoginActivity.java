@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -72,6 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                             String snumber = linkIntent.getData().getQueryParameter("scheduleNumber"); //스케줄 고유 번호
                             intent.putExtra("scheduleMaker",maker);
                             intent.putExtra("scheduleNumber",snumber);
+                            ScheduleData data=new ScheduleData(linkIntent.getData().getQueryParameter("myDetailSubject"),
+                                    linkIntent.getData().getQueryParameter("myDetailParticipants"),
+                                    linkIntent.getData().getQueryParameter("myDetailDate"),
+                                    linkIntent.getData().getQueryParameter("myDetailTime"),
+                                    linkIntent.getData().getQueryParameter("myDetailPlace"),
+                                    linkIntent.getData().getQueryParameter("myDetailMoney"),
+                                    linkIntent.getData().getQueryParameter("myMemo"));
+                            intent.putExtra("targetSchedule",data);
                         }
                         startActivity(intent);
                         Toast.makeText(LoginActivity.this,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();

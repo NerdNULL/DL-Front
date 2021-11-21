@@ -1,5 +1,6 @@
 package com.example.nerdnullfront.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.Fragment.AllScheduleFragment;
 import com.example.nerdnullfront.Fragment.CalendarFragment;
 import com.example.nerdnullfront.R;
@@ -32,9 +38,10 @@ public class MainActivity extends AppCompatActivity{
     private RelativeLayout drawerMenu;
     private ImageView profileImage;
     private ListView menuList;
-    private CalendarFragment calendarFragment; //캘린더 프래그먼트
+    static public CalendarFragment calendarFragment; //캘린더 프래그먼트
     private AllScheduleFragment allScheduleFragment; //전체 일정 프래그먼트
     private FragmentManager fragmentManager=null;
+    private ActivityResultLauncher<Intent> activityStarter;
     //계정정보
     private String nickName=null;
     private String profileImageURI=null;
@@ -54,13 +61,17 @@ public class MainActivity extends AppCompatActivity{
         fragmentManager=getSupportFragmentManager();
         //초기화면은 달력 프래그먼트이다.
         fragmentManager.beginTransaction().replace(R.id.frameLayout_MainActivity,calendarFragment).commit();
+
         if(getIntent().getBooleanExtra("invited",false)){ //딥링크 실행시,
             Intent intent=new Intent(MainActivity.this,InvitedActivity.class);
             String maker=getIntent().getStringExtra("scheduleMaker");
             String snumber=getIntent().getStringExtra("scheduleNumber");
             intent.putExtra("scheduleMaker",maker);
             intent.putExtra("scheduleNumber",snumber);
-            startActivity(intent);
+            ScheduleData data=(ScheduleData) getIntent().getSerializableExtra("targetSchedule");
+            intent.putExtra("targetSchedule",data);
+
+            activityStarter.launch(intent);
         }
     }
     public void setID(){
@@ -70,6 +81,16 @@ public class MainActivity extends AppCompatActivity{
         parentLayout=findViewById(R.id.parentLayout_MainActivity);
         drawerMenu=findViewById(R.id.drawerMenu_MainActivity);
         menuList=findViewById(R.id.menuList_MainActivity);
+        activityStarter=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode()== Activity.RESULT_OK) {
+                            ScheduleData data = (ScheduleData) getIntent().getSerializableExtra("targetSchedule");
+                            calendarFragment.addSchedule(data);
+                        }
+                    }
+                });
 
         //사이드 메뉴의 리스트
         ArrayAdapter adapter=new ArrayAdapter(MainActivity.this, android.R.layout.simple_expandable_list_item_1,

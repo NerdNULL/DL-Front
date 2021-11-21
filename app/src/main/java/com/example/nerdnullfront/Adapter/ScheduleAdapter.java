@@ -18,7 +18,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     private List<ScheduleData> list;
     private IScheduleClickable iClickable;
     public interface IScheduleClickable{
-        void onScheduleTouchEventing(int p);
+        void onScheduleTouchEventing(ScheduleData sd);
     }
     public ScheduleAdapter(List<ScheduleData> list, IScheduleClickable ic){
         this.list=list;
@@ -38,7 +38,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         holder.place.setText(list.get(position).getPlace());
         holder.time.setText(list.get(position).getTime());
         holder.itemView.setOnClickListener(v -> {
-            iClickable.onScheduleTouchEventing(position);
+            iClickable.onScheduleTouchEventing(list.get(position));
         });
     }
 

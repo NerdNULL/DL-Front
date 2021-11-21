@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 import com.example.nerdnullfront.ServerInterface.RemoveScheduleServerRequestAPI;
 import com.example.nerdnullfront.ServerInterface.UpdateScheduleServerRequestAPI;
@@ -46,6 +47,7 @@ public class PromiseDetailActivity extends AppCompatActivity {
     private Button addParticipants;
     private String nickName=null;
     private Retrofit retrofit;
+    private ScheduleData sd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,14 @@ public class PromiseDetailActivity extends AppCompatActivity {
         setID();
         setEvents();
         nickName=getIntent().getStringExtra("nickName");
+        sd=(ScheduleData)getIntent().getSerializableExtra("scData");
+        myDetailPlace.setText(sd.getPlace());
+        myDetailSubject.setText(sd.getPromise_name());
+        myDetailDate.setText(sd.getDate());
+        myDetailTime.setText(sd.getTime());
+        myDetailMoney.setText(sd.getMoney());
+        myMemo.setText(sd.getMemo());
+        myDetailParticipants.setText(sd.getParticipants());
     }
     public void setID(){
         addParticipants=findViewById(R.id.button_add);

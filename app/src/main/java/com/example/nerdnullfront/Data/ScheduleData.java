@@ -7,13 +7,19 @@ public class ScheduleData implements Serializable {
     String promiseName;
     String participants;
     String time;
+    String date;
     String place;
+    String money;
+    String memo;
 
-    public ScheduleData(String promiseName, String participants, String time, String place) {
+    public ScheduleData(String promiseName, String participants, String date,String time ,String place,String money,String memo) {
         this.promiseName = promiseName;
         this.participants = participants;
+        this.date=date;
         this.time = time;
         this.place = place;
+        this.money=money;
+        this.memo=memo;
     }
 
     public String getPromise_name() {
@@ -46,5 +52,14 @@ public class ScheduleData implements Serializable {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+    public String getDate() {
+        return date;
+    }
+    public String getMemo() {
+        return memo;
+    }
+    public String getMoney() {
+        return money;
     }
 }

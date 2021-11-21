@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 import com.example.nerdnullfront.ServerInterface.CreateScheduleServerRequestAPI;
 import com.example.nerdnullfront.ServerResponseDataSet.CreateScheduleResponseData;
@@ -115,8 +116,18 @@ public class PromiseAddActivity extends AppCompatActivity {
         addScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestCreateScheduleResponse(); //약속 생성요청
+                sendLink();
+                //requestCreateScheduleResponse(); //약속 생성요청
                 //스케줄 추가한 후, 인원을 정하는게 좋을듯 함. -> 약속 고유 번호로 다시 인원을 update해야 하기때문.
+                ScheduleData data=new ScheduleData(myDetailSubject.getText().toString(),
+                        "이선민,황명하",
+                        myDetailDate.getText().toString(),
+                        myDetailTime.getText().toString(),
+                        myDetailPlace.getText().toString(),
+                        myDetailMoney.getText().toString(),
+                        myMemo.getText().toString());
+                MainActivity.calendarFragment.addSchedule(data);
+                finish();
             }
         });
     }
@@ -130,7 +141,14 @@ public class PromiseAddActivity extends AppCompatActivity {
                                 R.string.kakao_scheme+"://"+R.string.kakaolink_host,R.string.kakao_scheme+"://"+R.string.kakaolink_host,
                                 new HashMap<String,String>(){{
                                     put("scheduleMaker",nickName); //약속을 만드는 사람의 닉네임
-                                    put("scheduleNumber",sNumber); //스케줄의 고유번호를 전달
+                                    put("sNumber",sNumber); //스케줄의 고유번호를 전달
+                                    put("myDetailSubject", myDetailSubject.getText().toString());
+                                    put("myDetailParticipants","이선민,황명하");
+                                    put("myDetailDate",myDetailDate.getText().toString());
+                                    put("myDetailTime",myDetailTime.getText().toString());
+                                    put("myDetailPlace",myDetailPlace.getText().toString());
+                                    put("myDetailMoney",myDetailMoney.getText().toString());
+                                    put("myMemo",myMemo.getText().toString());
                                 }}
                         )))
                 );
@@ -157,7 +175,7 @@ public class PromiseAddActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CreateScheduleResponseData> call, Response<CreateScheduleResponseData> response) {
                 //reponse.body().객체
-                sendLink(); //초대메세지 링크보내기
+                //sendLink(); //초대메세지 링크보내기
             }
             @Override
             public void onFailure(Call<CreateScheduleResponseData> call, Throwable t) {
