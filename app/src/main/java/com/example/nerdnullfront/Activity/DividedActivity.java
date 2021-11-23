@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.nerdnullfront.Fragment.CalendarFragment;
+
 import com.example.nerdnullfront.R;
 
 public class DividedActivity extends AppCompatActivity {
@@ -35,7 +34,9 @@ public class DividedActivity extends AppCompatActivity {
         toHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //홈으로 이동 버튼 누르면 메인화면으로 이동
-
+                Intent intent=new Intent(DividedActivity.this,HistoryActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

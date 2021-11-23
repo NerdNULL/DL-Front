@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Activity.PromiseAddActivity;
 import com.example.nerdnullfront.Activity.PromiseDetailActivity;
+import com.example.nerdnullfront.Activity.RouletteActivity;
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
@@ -48,6 +50,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
     private SlidingUpPanelLayout slider;
     private FloatingActionButton floatingActionButton;
     private String nickName=null;
+    private Button testBtn;
     private Retrofit retrofit;
     ArrayList<ScheduleData> arrayList=new ArrayList();
     public CalendarFragment(String nickName){
@@ -81,12 +84,20 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         slider=view.findViewById(R.id.slider);
         slideArrowImage=view.findViewById(R.id.slideArrow_ImageView);
         floatingActionButton=view.findViewById(R.id.addSchedule);
+        testBtn=view.findViewById(R.id.tester);
         retrofit = new Retrofit.Builder() // Retrofit 구성
                 .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
     public void setEvents(){
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), RouletteActivity.class);
+                startActivity(intent);
+            }
+        });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() { //캘린더의 날짜변경에 따른 이벤트
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
