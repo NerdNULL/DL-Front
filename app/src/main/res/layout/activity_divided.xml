@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:text="황명하"
+                android:text="이선민"
                 android:gravity="center"
                 android:hint="나눌 인원들의 이름들로 채우기" />
 

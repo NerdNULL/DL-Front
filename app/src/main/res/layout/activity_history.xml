@@ -15,7 +15,7 @@
             android:id="@+id/userNameText_HistoryActivity"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="황명하 님의 거래내역"
+            android:text="이선민 님의 거래내역"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <LinearLayout
