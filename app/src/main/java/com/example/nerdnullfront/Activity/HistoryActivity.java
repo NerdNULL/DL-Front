@@ -31,9 +31,8 @@ public class HistoryActivity extends AppCompatActivity {
         setEvents();
 
         ArrayList<HistoryData> list=new ArrayList<>();
-        list.add(new HistoryData("3000","2021.09.28"));
-        list.add(new HistoryData("10000","2021.09.28"));
-        list.add(new HistoryData("200","2021.09.28"));
+        list.add(new HistoryData("-2000","2021.11.21"));
+        list.add(new HistoryData("+4000","2021.12.10"));
         historyListAdapter.setList(list);
         historyList.setLayoutManager(new LinearLayoutManager(HistoryActivity.this,LinearLayoutManager.VERTICAL,false));
         historyList.setAdapter(historyListAdapter);

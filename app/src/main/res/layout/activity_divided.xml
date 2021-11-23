@@ -16,7 +16,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="약속명으로 채우기"
-            android:textColor="#000000" />
+            android:text="배분할 약속 : 회의"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FF5722" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,6 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="인원수 채우기"
+                    android:text="1"
+                    android:gravity="center"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -63,6 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
+                android:text="황명하"
+                android:gravity="center"
                 android:hint="나눌 인원들의 이름들로 채우기" />
 
         </LinearLayout>
@@ -97,6 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="금액 채우기"
+                    android:text="4000"
+                    android:gravity="center"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -124,6 +134,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="홈으로 이동" />
+            android:text="정산하기" />
     </LinearLayout>
 </LinearLayout>

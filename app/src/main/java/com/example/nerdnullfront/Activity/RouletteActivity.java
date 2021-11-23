@@ -1,15 +1,15 @@
 package com.example.nerdnullfront.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.nerdnullfront.Fragment.CalendarFragment;
+
 import com.example.nerdnullfront.R;
 
 public class RouletteActivity extends AppCompatActivity {
@@ -56,18 +56,18 @@ public class RouletteActivity extends AppCompatActivity {
             //라디오 버튼이 눌려진 뒤에야 버튼 후 정산이 가능해져야 함
             @Override
             public void onClick(View v) {
-                if(selectedRadioNum == 1) { //1번 옵션 선택 시
+                if (selectedRadioNum == 1) { //1번 옵션 선택 시
 
-                }
-                else if(selectedRadioNum == 2) { //2번 옵션 선택 시
+                } else if (selectedRadioNum == 2) { //2번 옵션 선택 시
 
-                }
-                else if(selectedRadioNum == 3) { //3번 옵션 선택 시
+                } else if (selectedRadioNum == 3) { //3번 옵션 선택 시
 
+                } else { //옵션 선택 안할 시 토스트 메시지 띄우기
+                    Toast.makeText(RouletteActivity.this, "먼저 옵션을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
-                else { //옵션 선택 안할 시 토스트 메시지 띄우기
-                    Toast.makeText(RouletteActivity.this,"먼저 옵션을 선택해주세요.",Toast.LENGTH_SHORT).show();
-                }
+                Intent intent=new Intent(RouletteActivity.this,DividedActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

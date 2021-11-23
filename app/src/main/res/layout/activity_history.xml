@@ -15,7 +15,7 @@
             android:id="@+id/userNameText_HistoryActivity"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="name 님의 거래내역"
+            android:text="황명하 님의 거래내역"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <LinearLayout
@@ -26,7 +26,7 @@
                 android:id="@+id/PaymentText_HistoryActivity"
                 android:textSize="40sp"
                 android:gravity="center"
-                android:text="13200 원"
+                android:text="+2000 원"
                 android:textColor="#000000"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
