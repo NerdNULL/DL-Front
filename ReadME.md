@@ -11,7 +11,7 @@
 <img width="80%" src="https://user-images.githubusercontent.com/78339038/147210117-8d92570a-4f07-4bcc-9e7b-2d505303f9da.PNG"/>
 
 ## action process
-<img width="80%" src="https://user-images.githubusercontent.com/78339038/147210521-16ca1adc-733f-4363-9cf6-5a37f12f23e5.png"/>
+<img width="60%" src="https://user-images.githubusercontent.com/78339038/147210521-16ca1adc-733f-4363-9cf6-5a37f12f23e5.png"/>
 
 ## Contributor
 [Lee-seon-min](https://github.com/Lee-seon-min) (Front-end, AOS)</br>
