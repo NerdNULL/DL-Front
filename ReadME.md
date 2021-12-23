@@ -14,8 +14,8 @@
 <img width="80%" src="https://user-images.githubusercontent.com/78339038/147210521-16ca1adc-733f-4363-9cf6-5a37f12f23e5.png"/>
 
 ## Contributor
-[Lee-seon-min](https://github.com/Lee-seon-min)(Front-end, AOS)</br>
-[kyw04004](https://github.com/kyw04004)(Back-end)</br>
-[kimcodingvv](https://github.com/kimcodingvv)(Back-end)</br>
-[MongDDangmania](https://github.com/MongDDangmania)(Front-end, AOS)</br>
-[River-Mt](https://github.com/River-Mt)(Back-end)
+[Lee-seon-min](https://github.com/Lee-seon-min) (Front-end, AOS)</br>
+[kyw04004](https://github.com/kyw04004) (Back-end)</br>
+[kimcodingvv](https://github.com/kimcodingvv) (Back-end)</br>
+[MongDDangmania](https://github.com/MongDDangmania) (Front-end, AOS)</br>
+[River-Mt](https://github.com/River-Mt) (Back-end)
