@@ -4,7 +4,7 @@
 ## Tech Stack(AOS) & Architecture
 * Android Studio(Java)를 이용한 애플리케이션 개발
 * Kakao API활용(지도, 메시지, 페이, 로그인)
-<img width="80%" src="https://user-images.githubusercontent.com/78339038/147209231-4c2a3acc-a273-4d25-a9e9-e4717c9417bd.png"/>
+<img width="70%" src="https://user-images.githubusercontent.com/78339038/147209231-4c2a3acc-a273-4d25-a9e9-e4717c9417bd.png"/>
 
 ## 애플리케이션 화면
 <img width="80%" src="https://user-images.githubusercontent.com/78339038/147210095-19259ca6-6d1e-4e5c-a131-1978ad109f71.PNG"/>
