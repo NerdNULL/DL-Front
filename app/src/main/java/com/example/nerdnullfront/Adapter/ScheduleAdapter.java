@@ -20,6 +20,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public interface IScheduleClickable{
         void onScheduleTouchEventing(ScheduleData sd);
     }
+    public void setList(List<ScheduleData> list){
+        this.list=list;
+    }
     public ScheduleAdapter(List<ScheduleData> list, IScheduleClickable ic){
         this.list=list;
         iClickable=ic;

@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.R;
 import com.example.nerdnullfront.ServerInterface.CreateScheduleServerRequestAPI;
@@ -37,7 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PromiseAddActivity extends AppCompatActivity {
+public class PromiseAddActivity extends AppCompatActivity implements ScheduleAdapter.IScheduleClickable{
     private Button addPlaceBtn,addScheduleBtn,payBtn;
     private ActivityResultLauncher<Intent> activityStarter;
     private EditText myDetailPlace,myDetailSubject,myDetailDate,myDetailTime,myDetailMoney,myMemo;
@@ -52,7 +53,7 @@ public class PromiseAddActivity extends AppCompatActivity {
         setEvents();
         nickName=getIntent().getStringExtra("nickName");
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
+                .baseUrl("http://3.35.234.34/") //요청 URL(IP)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -116,7 +117,7 @@ public class PromiseAddActivity extends AppCompatActivity {
         addScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendLink();
+                //sendLink();
                 //requestCreateScheduleResponse(); //약속 생성요청
                 //스케줄 추가한 후, 인원을 정하는게 좋을듯 함. -> 약속 고유 번호로 다시 인원을 update해야 하기때문.
                 ScheduleData data=new ScheduleData(myDetailSubject.getText().toString(),
@@ -168,19 +169,26 @@ public class PromiseAddActivity extends AppCompatActivity {
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
     public void requestCreateScheduleResponse(){
+        String title,date,time,place,payment,description;
         CreateScheduleServerRequestAPI api = retrofit.create(CreateScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
-        Call<CreateScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        Call<CreateScheduleResponseData> call = api.getSearchKeyword("101");  // 검색 조건 입력
         // API 서버에 요청
         call.enqueue(new Callback<CreateScheduleResponseData>() {
             @Override
             public void onResponse(Call<CreateScheduleResponseData> call, Response<CreateScheduleResponseData> response) {
                 //reponse.body().객체
                 //sendLink(); //초대메세지 링크보내기
+                Toast.makeText(PromiseAddActivity.this,"생성완료 : "+response.body().status,Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<CreateScheduleResponseData> call, Throwable t) {
 
             }
         });
+    }
+
+    @Override
+    public void onScheduleTouchEventing(ScheduleData sd) {
+
     }
 }

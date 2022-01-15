@@ -2,6 +2,7 @@ package com.example.nerdnullfront.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nerdnullfront.Activity.PromiseAddActivity;
 import com.example.nerdnullfront.Activity.PromiseDetailActivity;
-import com.example.nerdnullfront.Activity.RouletteActivity;
 import com.example.nerdnullfront.Adapter.ScheduleAdapter;
 import com.example.nerdnullfront.Adapter.UpComingScheduleAdapter;
 import com.example.nerdnullfront.Data.ScheduleData;
 import com.example.nerdnullfront.Data.UpComingScheduleData;
 import com.example.nerdnullfront.R;
+import com.example.nerdnullfront.ServerInterface.CreateScheduleServerRequestAPI;
 import com.example.nerdnullfront.ServerInterface.ReadScheduleServerRequestAPI;
+import com.example.nerdnullfront.ServerResponseDataSet.CreateScheduleResponseData;
 import com.example.nerdnullfront.ServerResponseDataSet.ReadScheduleResponseData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -86,7 +88,7 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         floatingActionButton=view.findViewById(R.id.addSchedule);
         testBtn=view.findViewById(R.id.tester);
         retrofit = new Retrofit.Builder() // Retrofit 구성
-                .baseUrl("http://jsonplaceholder.typicode.com") //요청 URL
+                .baseUrl("http://3.35.234.34/") //요청 URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -94,8 +96,26 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(), RouletteActivity.class);
-                startActivity(intent);
+                //Intent intent=new Intent(getActivity(), RouletteActivity.class);
+                //startActivity(intent);
+                CreateScheduleServerRequestAPI api = retrofit.create(CreateScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
+                Call<CreateScheduleResponseData> call = api.getSearchKeyword("101");  // 검색 조건 입력
+                // API 서버에 요청
+                call.enqueue(new Callback<CreateScheduleResponseData>() {
+                    @Override
+                    public void onResponse(Call<CreateScheduleResponseData> call, Response<CreateScheduleResponseData> response) {
+                        //reponse.body().객체
+                        //sendLink(); //초대메세지 링크보내기
+                        if(response.isSuccessful())
+                            Log.e("TESTING","성공"+response.body().status);
+                        else
+                            Log.e("TESTING","성공..?");
+                    }
+                    @Override
+                    public void onFailure(Call<CreateScheduleResponseData> call, Throwable t) {
+                        Log.e("TESTING","실패"+t.getMessage());
+                    }
+                });
             }
         });
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() { //캘린더의 날짜변경에 따른 이벤트
