@@ -182,4 +182,9 @@ public class CalendarFragment extends Fragment implements ScheduleAdapter.ISched
             }
         });
     }
+    public void addSchedule(ScheduleData data){
+        /***
+         * Update Schedule Logic(to Server) using retrofit
+         * ***/
+    }
 }

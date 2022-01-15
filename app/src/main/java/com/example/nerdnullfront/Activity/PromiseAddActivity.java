@@ -123,17 +123,24 @@ public class PromiseAddActivity extends AppCompatActivity {
     public void sendLink(){
         FeedTemplate feedTemplate = new FeedTemplate(new Content(
                 nickName+" 님이 귀하를 약속에 초대하였습니다!",
-                "http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png",
+                "https://drive.google.com/file/d/1nFX83bl7FBcb3RSdGK-y3DLZAZ_HNjgc/view?usp=sharing/",
                 new Link(null, null)), null, null,
                 Arrays.asList(
                         new com.kakao.sdk.template.model.Button("초대 확인하기",new Link(
                                 R.string.kakao_scheme+"://"+R.string.kakaolink_host,R.string.kakao_scheme+"://"+R.string.kakaolink_host,
                                 new HashMap<String,String>(){{
                                     put("scheduleMaker",nickName); //약속을 만드는 사람의 닉네임
-                                    put("scheduleNumber",sNumber); //스케줄의 고유번호를 전달
+                                    put("sNumber",sNumber); //스케줄의 고유번호를 전달
+                                    put("myDetailSubject", myDetailSubject.getText().toString());
+                                    put("myDetailParticipants","xxx,yyy");
+                                    put("myDetailDate",myDetailDate.getText().toString());
+                                    put("myDetailTime",myDetailTime.getText().toString());
+                                    put("myDetailPlace",myDetailPlace.getText().toString());
+                                    put("myDetailMoney",myDetailMoney.getText().toString());
+                                    put("myMemo",myMemo.getText().toString());
                                 }}
                         )))
-                );
+        );
         LinkClient.getInstance().defaultTemplate(this, feedTemplate, new Function2<LinkResult, Throwable, Unit>() {
             @Override
             public Unit invoke(LinkResult linkResult, Throwable throwable) {
@@ -149,14 +156,16 @@ public class PromiseAddActivity extends AppCompatActivity {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
-    public void requestCreateScheduleResponse(){
+    public void requestCreateScheduleResponse(){ //약속을 생성하여 DB에 저장을 요청한다.
         CreateScheduleServerRequestAPI api = retrofit.create(CreateScheduleServerRequestAPI.class);   // 통신 인터페이스를 객체로 생성
-        Call<CreateScheduleResponseData> call = api.getSearchKeyword("", "");  // 검색 조건 입력
+        Call<CreateScheduleResponseData> call = api.getSearchKeyword("keyword");  // 검색 조건 입력
         // API 서버에 요청
         call.enqueue(new Callback<CreateScheduleResponseData>() {
             @Override
             public void onResponse(Call<CreateScheduleResponseData> call, Response<CreateScheduleResponseData> response) {
-                //reponse.body().객체
+                /***
+                 * receive response using "response.body()"
+                 */
                 sendLink(); //초대메세지 링크보내기
             }
             @Override
